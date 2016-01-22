@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<title>Test cases</title>
+
+</head>
+
+<body>
+<h1>Test cases</h1>
+
+<p>Tests for adding <code>role="heading"</code> and <code>aria-level="2"</code> to different SVG elements.</p>
+
+<h2>To the <code>&lt;rect&gt;</code> element</h2>
+
+<svg version="1.1" width="80%" height="100%">
+<rect role="heading" aria-level="2" width="75" height="50" rx="20" ry="20" opacity="0.5" fill="#90ee90" stroke="#228b22"></rect>
+<text x="35" y="30" font-size="1em" text-anchor="middle" fill="#000000" stroke="#000">Website</text>
+</svg>
+
+<h2>To the <code>&lt;g&gt;</code> element</h2>
+
+<svg version="1.1" width="80%" height="100%">
+<g role="heading" aria-level="2">
+<title>Title is website</title>
+<rect width="75" height="50" rx="20" ry="20" opacity="0.5" fill="#90ee90" stroke="#228b22"></rect>
+<text x="35" y="30" font-size="1em" text-anchor="middle" fill="#000000" stroke="#000">Website</text></g>
+</svg>
+
+
+<h2>To the <code>&lt;text&gt;</code> element</h2>
+
+<svg version="1.1" width="80%" height="100%">
+<rect width="75" height="50" rx="20" ry="20" fill="#90ee90" stroke="#228b22" stroke-fill="1"></rect>
+<text role="heading" aria-level="2" x="35" y="30" font-size="1em" text-anchor="middle" fill="#000000">Website</text>
+</svg>
+
+<h2>Use <code>tabindex=</code> attribute on <code>&lt;rect&gt;</code> element</h2>
+
+<svg version="1.1" width="80%" height="100%">
+<rect tabindex="0" width="75" height="50" rx="20" ry="20" fill="#90ee90" stroke="#228b22" stroke-fill="1"></rect>
+<text x="35" y="30" font-size="1em" text-anchor="middle" fill="#000000">Website</text>
+</svg>
+
+<h2>Use <code>tabindex=</code> attribute on <code>&lt;text&gt;</code> element</h2>
+
+<svg version="1.1" width="80%" height="100%">
+<rect width="75" height="50" rx="20" ry="20" fill="#90ee90" stroke="#228b22" stroke-fill="1"></rect>
+<text tabindex="0" x="35" y="30" font-size="1em" text-anchor="middle" fill="#000000">Website</text>
+</svg>
+
+
+</body></html>

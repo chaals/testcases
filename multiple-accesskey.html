@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html><head>
+<title>Accesskey test</title>
+</head><body>
+<h1>Accesskey test</h1>
+<p>what happens if you use the same accesskey twice?
+<form>
+<p><input type="text" accesskey="a" value="accesskey a" name="first">
+<p><input type="text" accesskey="a" value="accesskey a" name="second">
+<p><a href="multiple-accesskey.html?this=that" accesskey="a">a link with accesskey="a"</a>
+<p><a href="multiple-accesskey.html?that=this" accesskey="a">another link with accesskey="a"</a>
+<p id="output">
+<script>
+document.querySelector("#output").innerText=document.location.search;
+</script>
+</body></html>

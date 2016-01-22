@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>details/summary</title>
+ <head>
+ <body>
+  <h1>details/summary for label test</h1>
+  <p>There is an <code>input</code> with a <code>label</code>. It is followed by a <code>details</code> element that is <code>aria-labelledby</code> the input's label, which has a <code>summary</code> and a single paragraph expansion.</p>
+  <dl>
+   <dt>Expected results:</dt>
+    <dd>The checkbox is in the navigation order and can be selected</dd>
+    <dd>Clicking on the label checks the checkbox</dd>
+  </dl>
+
+  <input type="checkbox" id="JuHu" name="dog" value="1">
+  <label for="JuHu" id="desc">Dog</label>
+ 
+  <details  aria-labelledby="desc">
+   <summary>Properties of a dog</summary>
+   <p>Dogs are animals with a lot of fur, four legs and a tail </p>
+  </details>
+ </body>
+</html>

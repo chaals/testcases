@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>iframe changing src - what happens</title>
+<body>
+<iframe id="here" src="http://www.w3.org"></iframe>
+<script>
+  setTimeout(swap,5000);
+
+function swap() {
+  document.querySelector('#here').src="http://chaals.com";
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>Imagemap redundant alt? test</title>
+ </head>
+ <body>
+  <img src="" width="400" height="400" alt="the image" usemap="#themap">
+<map name="themap">
+ <area shape="rect" coords="0,0,100,400" href="gothere.html" alt="Both linked areas should offer this text">
+ <area shape="rect" coords="300,0,400,400" href="gothere.html">
+</map>
+
+ </body>
+</html>

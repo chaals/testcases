@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>embedded SVG switch test</title>
+</head><body>
+<svg>
+  <desc>This example uses the 'switch' element to provide a
+        fallback graphical representation of an paragraph, if
+        XMHTML is not supported.</desc>
+  <!-- The 'switch' element will process the first child element
+       whose testing attributes evaluate to true.-->
+  <switch>
+    <!-- Process the embedded XHTML if the requiredExtensions attribute
+         evaluates to true (i.e., the user agent supports XHTML
+         embedded within SVG). -->
+    <foreignObject width="100" height="50"
+                   requiredExtensions="http://example.com/SVGExtensions/EmbeddedXHTML">
+      <!-- XHTML content goes here -->
+      <body xmlns="http://www.w3.org/1999/xhtml">
+        <p>Here is an HTML paragraph that requires word wrap</p>
+      </body>
+    </foreignObject>
+    <!-- Else, process the following alternate SVG.
+         Note that there are no testing attributes on the 'text' element.
+         If no testing attributes are provided, it is as if there
+         were testing attributes and they evaluated to true.-->
+    <text font-size="10" font-family="Verdana">
+      <tspan x="10" y="10">Here is some SVG text</tspan>
+      <tspan x="10" y="20">faking word wrap.</tspan>
+    </text>
+  </switch>
+  <switch>
+    <!-- tests for language support -->
+    <!-- Else, process the following alternate SVG.
+         Note that there are no testing attributes on the 'text' element.
+         If no testing attributes are provided, it is as if there
+         were testing attributes and they evaluated to true.-->
+    <text font-size="10" font-family="Verdana" y="40" systemLanguage="zh">Voici des mots en français</text>
+    <text font-size="10" font-family="Verdana" y="40" systemLanguage="en">Here is some english text</text>
+    <text font-size="10" font-family="Verdana" y="40" systemLanguage="fr">Вот что-то по-русски</text>
+    <text font-size="10" font-family="Verdana" y="40">Не знаю</text>
+  </switch>
+  <switch>
+    <!-- tests for language support -->
+    <foreignObject width="100" height="50" y="70" systemLanguage="zh">
+     <button>Voici des mots en français</button>
+    </foreignObject>
+    <foreignObject width="100" height="50" y="70" systemLanguage="es">
+     <button>Palabras castellanas</button>
+    </foreignObject>
+    <foreignObject width="100" height="50" y="70" systemLanguage="en">
+     <button>english words</button>
+    </foreignObject>
+  </switch>
+</svg>
+</body></html>

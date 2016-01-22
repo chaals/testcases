@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<!-- saved from url=(0046)http://oaa-accessibility.org/examplep/button1/ -->
+<!-- and then I messed around with it some -->
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head id="head"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title id="header_title">Example - Button role example using text-only buttons</title>
+    
+    
+    
+    <link rel="stylesheet" href="./aria-button-as-real-button_files/openajax-example-print.css" type="text/css" media="print">
+    <link rel="stylesheet" href="./aria-button-as-real-button_files/openajax-example-screen.css" type="text/css" media="screen" title="screen">
+
+    <script type="text/javascript">
+      var $URL_SITE = "http://www.oaa-accessibility.org/media//";
+    </script>
+    
+    
+
+
+
+
+<style type="text/css">
+
+
+ul.buttons {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+ul.buttons li {
+  float: left;
+  text-align: center;
+  margin-right: .25em;
+  padding-left: .25em;
+  padding-right: .25em;
+  width: 1em;
+  font-weight: bold;
+  height: 100%;
+  border: 2px solid black;
+}
+
+ul.buttons li[aria-pressed="true"] {
+  border-top: black 3px solid;
+  border-left: black 3px solid;
+  border-bottom: black 1px solid;
+  border-right:  black 1px solid;
+  
+}
+
+ul.buttons li[aria-pressed="false"] {
+  border-top: black 1px solid;
+  border-left: black 1px solid;
+  border-bottom: black 3px solid;
+  border-right: black 3px solid;
+  
+}
+
+ul.buttons li[aria-pressed="true"]:focus,
+ul.buttons li[aria-pressed="true"]:active{
+  border-top: #CCCCCC 3px solid;
+  border-left: #CCCCCC 3px solid;
+  border-bottom: #CCCCCC 1px solid;
+  border-right:  #CCCCCC 1px solid;
+  color: white;
+  background-color: black;
+  
+}
+
+ul.buttons li[aria-pressed="false"]:focus,
+ul.buttons li[aria-pressed="false"]:active{
+  border-top: #CCCCCC 1px solid;
+  border-left: #CCCCCC 1px solid;
+  border-bottom: #CCCCCC 3px solid;
+  border-right: #CCCCCC 3px solid;
+  color: white;
+  background-color: black;
+  
+}
+
+.italic {
+  font-style: italic;
+} 
+
+.bold {
+  font-weight: bold;
+}
+
+ul.buttons{
+  font-weight: bold;
+}
+
+textarea.example {
+  clear: both;
+  padding: .25em;
+  width: 50%;
+  height: 200px;
+}
+
+.hide {
+position: absolute;
+top: -20em;
+left: -200em;
+} 
+
+</style>
+
+
+
+
+
+    
+
+
+<script type="text/javascript" src="./aria-button-as-real-button_files/jquery-1.4.2.min.js"></script>
+
+
+
+<script type="text/javascript">
+
+var KEY_ENTER = 13;
+var KEY_SPACE = 32;
+
+$(document).ready(function() {
+
+	$('ul.button li, button').mousedown(function(event) {
+
+		var ariaControls = '#' + $(this).attr('aria-controls');
+
+		switch($(this).attr('aria-labelledby')) {
+			case 'italic_label': {
+				$(ariaControls).toggleClass('italic');
+				break;
+			}
+			case 'bold_label': {
+				$(ariaControls).toggleClass('bold');
+				break;
+			}
+			case 'larger_label': {
+				increaseFontSize(ariaControls);
+				break;
+			}
+			case 'smaller_label': {
+				decreaseFontSize(ariaControls);
+				break;
+			}
+		} // end switch
+
+		if ($(this).hasClass('toggleButton') == true) {
+
+				// This is a toggle button: toggle aria-pressed state
+				togglePressed(this);
+		}
+		else
+		{
+				// This is a momentary pushbutton: Set aria-pressed to true
+				$(this).attr('aria-pressed', 'true');
+		}
+
+		$(this).focus();
+
+		event.stopPropagation();
+		return false;
+	}); // end button click handler
+
+	// bind a mouseup handler to the buttons to enable momentary pushbuttons
+	// to return to unpressed state and toggle buttons to remain pressed
+	// 
+	$('ul.buttons li, button').mouseup(function(event) {
+
+		if ($(this).hasClass('toggleButton') == false) {
+
+			// Set aria-pressed to false
+			$(this).attr('aria-pressed', 'false');
+		}
+
+		event.stopPropagation();
+		return false;
+	}); // end mouseup handler
+
+	// keypress handler
+	//
+	// The Opera browser detects keystrokes to perform window manipulation during the keypress event,
+	// not keydown like IE, Firefox, and Safari. Relevant keypresses are consumed by this handler to
+	// make the browser behave properly when the user is manipulating the buttons.
+	//
+	$('ul.buttons li, button').keypress(function(event) {
+
+		switch (event.which) {
+			case KEY_ENTER:
+			case KEY_SPACE: {
+				event.stopPropagation;
+				return false;
+				break;
+			}
+		} //end switch
+		return true;
+	});
+
+	$('ul.buttons li, button').keydown(function(event) {
+
+		var ariaControls = '#' + $(this).attr('aria-controls');
+
+		switch (event.which) {
+			case KEY_ENTER:
+			case KEY_SPACE: {
+				switch($(this).attr('aria-labelledby')) {
+					case 'italic_label': {
+						$(ariaControls).toggleClass('italic');
+						break;
+					}
+					case 'bold_label': {
+						$(ariaControls).toggleClass('bold');
+						break;
+					}
+					case 'larger_label': {
+						increaseFontSize(ariaControls);
+						break;
+					}
+					case 'smaller_label': {
+						decreaseFontSize(ariaControls);
+						break;
+					}
+				} // end switch
+
+				if ($(this).hasClass('toggleButton') == true) {
+
+						// This is a toggle button: toggle aria-pressed state
+						togglePressed(this);
+				}
+				else
+				{
+						// This is a momentary pushbutton: Set aria-pressed to true
+						$(this).attr('aria-pressed', 'true');
+				}
+
+				event.stopPropagation();
+				return false;
+
+			} // end case
+		} // end switch
+
+		return true;
+	}); // end button click handler
+
+	// bind a keyup handler to the buttons to enable momentary pushbuttons
+	// to return to unpressed state and toggle buttons to remain pressed
+	// 
+	$('ul.buttons li, button').keyup(function(event) {
+		
+		id = this;
+
+		switch (event.which) {
+			case KEY_ENTER:
+			case KEY_SPACE: {
+				if ($(this).hasClass('toggleButton') == false) {
+				
+					// set aria-pressed to false
+					$(id).attr('aria-pressed', 'false');
+				}
+
+				event.stopPropagation();
+				return false;
+			} // end case
+		} // end switch
+
+		return true;
+	}); // end mouseup handler
+
+	/**
+	 * increaseFontSize() increases the font size for the controlled area
+	 *
+	 * @param (ariaControls) id of text area to modify
+	 *
+	 * @return N/A
+	 */
+	function increaseFontSize(ariaControls) {
+	
+		var $text = $(ariaControls);
+		var fontSize = parseFloat($text.css('fontSize'), 10);
+	
+		// increase the font size
+		fontSize *= 1.4;
+	
+		if (fontSize > 120) {
+			return;
+		}
+		// write the new value to the css property
+		// note: 'px' must be appended for valid css
+		$text.css('fontSize', fontSize+'px');
+	} // end increaseFontSize()
+	
+	/**
+	 * decreaseFontSize() decreases the font size for the controlled area
+	 *
+	 * @param (ariaControls) id of text area to modify
+	 *
+	 * @return N/A
+	 */
+	function decreaseFontSize(ariaControls) {
+	
+		var $text = $(ariaControls);
+		var fontSize = parseFloat($text.css('fontSize'), 10);
+	
+		// increase the font size
+		fontSize /= 1.4;
+	
+		if (fontSize < 4) {
+			return;
+		}
+	
+		// write the new value to the css property
+		// note: 'px' must be appended for valid css
+		$text.css('fontSize', fontSize+'px');
+	
+	} // end decreaseFontSize
+	
+	/**
+	 * togglePressed() toggles the aria-pressed atribute between true or false
+	 *
+	 * @param ( id object) button to be operated on
+	 *
+	 * @return N/A
+	 */
+	function togglePressed(id) {
+	
+		// reverse the aria-pressed state
+		if ($(id).attr('aria-pressed') == 'true') {
+			$(id).attr('aria-pressed', 'false');
+		}
+		else {
+			$(id).attr('aria-pressed', 'true');
+		}
+	}
+
+}); // end ready
+
+</script>
+
+
+
+
+
+  </head>
+  
+<body>
+  <div id="banner" role="banner">        
+    <div class="content">
+      <div class="title">Accessibility Examples</div>
+      <div class="banner_nav" role="navigation" aria-labelledby="admin_label">
+        <h2 id="admin_label">OpenAjax Links</h2>
+        <ul>
+          <li><a href="http://www.openajax.org/member/wiki/Accessibility">OpenAjax Alliance Accessibility Task Force</a></li>
+          <li><a href="http://www.opanajax.org/">OpenAjax Alliance</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>   
+
+
+
+
+<div id="nav" role="navigation" aria-labelledby="nav_label">
+    <h2 id="nav_label">Example Navigation</h2>
+    <ul>
+        <li><a href="http://oaa-accessibility.org/examples/">All Examples</a></li>
+    </ul>
+</div>
+
+
+  
+  <div id="content">
+    <h1>Example - Button role example using text-only buttons</h1>
+
+
+<div id="example" role="main">
+    
+    
+ 
+    <h2 id="start">Example Start</h2>
+    
+    <div id="example_code">
+        
+<div role="application">
+
+<h3>Text Sample 1</h3>
+
+<ul class="buttons" title="Text Formating Controls 1">
+
+    <button id="larger1" role="button" tabindex="0" aria-pressed="false" aria-controls="text1" aria-labelledby="larger_label">+</button>
+            
+    <button id="smaller1" role="button" tabindex="0" aria-pressed="false" aria-controls="text1" aria-labelledby="smaller_label">-</button>
+           
+    <button id="italic1" role="button" class="toggleButton italic" tabindex="0" aria-pressed="true" aria-controls="text1" aria-labelledby="italic_label">i</button>
+        
+    <button id="bold1" role="button" class="toggleButton" tabindex="0" aria-pressed="false" aria-controls="text1" aria-labelledby="bold_label">B</button>
+        
+</ul>
+
+<p style="clear: both; height: 1px">&nbsp;</p>
+
+<label for="text1" class="hide">Text Sample 1</label>
+<textarea id="text1" name="text1" class="example italic" style="font-size: 11px;"> 
+Four score and seven years ago our fathers brought forth on this continent a new nation, conceived in Liberty, and dedicated to the proposition that all men are created equal.
+
+Now we are engaged in a great civil war, testing whether that nation, or any nation, so conceived and so dedicated, can long endure. We are met on a great battle-field of that war. We have come to dedicate a portion of that field, as a final resting place for those who here gave their lives that that nation might live. It is altogether fitting and proper that we should do this.
+</textarea>        
+<p>&nbsp;</p>
+
+<h3>Text Sample 2</h3>
+
+<ul class="buttons" title="Text Formating Controls 2">
+
+    <li id="larger2" role="button" tabindex="0" aria-pressed="false" aria-controls="text2" aria-labelledby="larger_label">+</li>
+            
+    <li id="smaller2" role="button" tabindex="0" aria-pressed="false" aria-controls="text2" aria-labelledby="smaller_label">-</li>
+           
+    <li id="italic2" role="button" class="toggleButton italic" tabindex="0" aria-pressed="false" aria-controls="text2" aria-labelledby="italic_label">i</li>
+        
+    <li id="bold2" role="button" class="toggleButton" tabindex="0" aria-pressed="true" aria-controls="text2" aria-labelledby="bold_label">B</li>
+        
+</ul>
+
+<p style="clear: both; height: 1px">&nbsp;</p>
+
+<label for="text2" class="hide">Text Sample 2</label>
+<textarea id="text2" name="text2" class="example bold">But, in a larger sense, we can not dedicate - we can not consecrate - we can not hallow - this ground. The brave men, living and dead, who struggled here, have consecrated it, far above our poor power to add or detract. The world will little note, nor long remember what we say here, but it can never forget what they did here. It is for us the living, rather, to be dedicated here to the unfinished work which they who fought here have thus far so nobly advanced. It is rather for us to be here dedicated to the great task remaining before us - that from these honored dead we take increased devotion to that cause for which they gave the last full measure of devotion - that we here highly resolve that these dead shall not have died in vain - that this nation, under God, shall have a new birth of freedom - and that government of the people, by the people, for the people, shall not perish from the earth. 
+</textarea>
+
+<p class="hide" id="bold_label">Bold</p>
+
+<p class="hide" id="italic_label">Italic</p>
+
+<p class="hide" id="larger_label">Font Larger</p>
+
+<p class="hide" id="smaller_label">Font Smaller</p>
+
+</div>
+
+    </div>
+    
+    <h2 id="end">Example End</h2>
+    
+    
+    <h2>Example Description</h2>
+    <div id="description">
+        <p>Type: <span class="bp">Best Practice</span></p>
+        
+        <p>Simple example using buttons to style and size text in a text box.</p>
+        
+    </div>
+
+    <h2>Keyboard Support</h2>
+    <div id="keyboard">
+        
+        <p>The following keyboard shortcuts are implemented for this example (based on recommended shortcuts specified by the <a href="http://dev.aol.com/dhtml_style_guide"><span class="caps">DHTML</span> Style Guide Working Group</a>.):<br>
+</p><ul><br>
+    <li>Tab: move between button items.</li><br>
+    <li><span class="caps">ENTER</span> or Space: toggle <code>aria-pressed</code> state of currently focused button. Italics and bold buttons will continuously toggle until key is released.</li><br>
+</ul><p></p>
+        
+    </div>
+    
+    <h2>Example Markup</h2>
+    
+    <ul>  
+        
+        <li>ARIA 1.0: [aria-controls]</li>      
+        
+        <li>ARIA 1.0: [aria-labelledby]</li>      
+        
+        <li>ARIA 1.0: [aria-pressed]</li>      
+        
+        <li>ARIA 1.0: [role="button"]</li>      
+        
+    </ul>
+        
+    
+    <h2>Browser Compatibility</h2>
+    
+    <ul>  
+        
+        <li>osx: Firefox 3.6 (<span class="c"><abbr title="Complete">C</abbr></span>)</li>      
+        
+        <li>osx: Opera 11.0 (<span class="c"><abbr title="Complete">C</abbr></span>)</li>      
+        
+        <li>osx: Safari 5.0 (<span class="c"><abbr title="Complete">C</abbr></span>)</li>      
+        
+        <li>win: Firefox 3.6 (<span class="c"><abbr title="Complete">C</abbr></span>)</li>      
+        
+        <li>win: Internet Explorer 8.0 (<span class="c"><abbr title="Complete">C</abbr></span>)</li>      
+        
+        <li>win: Opera 11.0 (<span class="c"><abbr title="Complete">C</abbr></span>)</li>      
+        
+        <li>win: Safari 5.0 (<span class="c"><abbr title="Complete">C</abbr></span>)</li>      
+        
+    </ul>
+    
+    
+    
+    <h2>HTML Source Code</h2>
+    <div class="code">
+        <br>
+&lt;div role="application"&gt;<br>
+<br>
+&lt;h3&gt;Text Sample 1&lt;/h3&gt;<br>
+<br>
+&lt;ul class="buttons" title="Text Formating Controls 1"&gt;<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;li id="larger1"&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;role="button"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tabindex="0"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;aria-pressed="false"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;aria-controls="text1"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;aria-labelledby="larger_label"&gt;+&lt;/li&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;li id="smaller1"&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;role="button"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tabindex="0"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;aria-pressed="false"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;aria-controls="text1"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;aria-labelledby="smaller_label"&gt;-&lt;/li&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;li id="italic1"&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;role="button"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;class="toggleButton italic"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tabindex="0"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;aria-pressed="true"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;aria-controls="text1"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;aria-labelledby="italic_label"&gt;i&lt;/li&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;li id="bold1"&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;role="button"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;class="toggleButton"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tabindex="0"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;aria-pressed="false"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;aria-controls="text1"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;aria-labelledby="bold_label"&gt;B&lt;/li&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&lt;/ul&gt;<br>
+<br>
+&lt;p style="clear: both; height: 1px"&gt;&amp;nbsp;&lt;/p&gt;<br>
+<br>
+&lt;label for="text1" class="hide"&gt;Text Sample 1&lt;/label&gt;<br>
+&lt;textarea id="text1" name="text1" class="example italic"&gt; <br>
+Four score and seven years ago our fathers brought forth on this continent a new nation, conceived in Liberty, and dedicated to the proposition that all men are created equal.<br>
+<br>
+Now we are engaged in a great civil war, testing whether that nation, or any nation, so conceived and so dedicated, can long endure. We are met on a great battle-field of that war. We have come to dedicate a portion of that field, as a final resting place for those who here gave their lives that that nation might live. It is altogether fitting and proper that we should do this.<br>
+&lt;/textarea&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;<br>
+<br>
+&lt;h3&gt;Text Sample 2&lt;/h3&gt;<br>
+<br>
+&lt;ul class="buttons" title="Text Formating Controls 2"&gt;<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;li id="larger2"&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;role="button"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tabindex="0"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;aria-pressed="false"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;aria-controls="text2"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;aria-labelledby="larger_label"&gt;+&lt;/li&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;li id="smaller2"&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;role="button"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tabindex="0"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;aria-pressed="false"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;aria-controls="text2"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;aria-labelledby="smaller_label"&gt;-&lt;/li&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;li id="italic2"&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;role="button"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;class="toggleButton italic"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tabindex="0"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;aria-pressed="false"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;aria-controls="text2"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;aria-labelledby="italic_label"&gt;i&lt;/li&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;li id="bold2"&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;role="button"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;class="toggleButton"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tabindex="0"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;aria-pressed="true"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;aria-controls="text2"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;aria-labelledby="bold_label"&gt;B&lt;/li&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&lt;/ul&gt;<br>
+<br>
+&lt;p style="clear: both; height: 1px"&gt;&amp;nbsp;&lt;/p&gt;<br>
+<br>
+&lt;label for="text2" class="hide"&gt;Text Sample 2&lt;/label&gt;<br>
+&lt;textarea id="text2" name="text2" class="example bold"&gt;<br>
+But, in a larger sense, we can not dedicate - we can not consecrate - we can not hallow - this ground. The brave men, living and dead, who struggled here, have consecrated it, far above our poor power to add or detract. The world will little note, nor long remember what we say here, but it can never forget what they did here. It is for us the living, rather, to be dedicated here to the unfinished work which they who fought here have thus far so nobly advanced. It is rather for us to be here dedicated to the great task remaining before us - that from these honored dead we take increased devotion to that cause for which they gave the last full measure of devotion - that we here highly resolve that these dead shall not have died in vain - that this nation, under God, shall have a new birth of freedom - and that government of the people, by the people, for the people, shall not perish from the earth. <br>
+&lt;/textarea&gt;<br>
+<br>
+&lt;p class="hide" id="bold_label"&gt;Bold&lt;/p&gt;<br>
+<br>
+&lt;p class="hide" id="italic_label"&gt;Italic&lt;/p&gt;<br>
+<br>
+&lt;p class="hide" id="larger_label"&gt;Font Larger&lt;/p&gt;<br>
+<br>
+&lt;p class="hide" id="smaller_label"&gt;Font Smaller&lt;/p&gt;<br>
+<br>
+&lt;/div&gt;<br>
+
+    </div>
+    
+    
+    <h2>CSS Code</h2>
+    <div class="code">
+        <br>
+<br>
+ul.buttons {<br>
+&nbsp;&nbsp;margin: 0;<br>
+&nbsp;&nbsp;padding: 0;<br>
+&nbsp;&nbsp;list-style: none;<br>
+}<br>
+<br>
+ul.buttons li {<br>
+&nbsp;&nbsp;float: left;<br>
+&nbsp;&nbsp;text-align: center;<br>
+&nbsp;&nbsp;margin-right: .25em;<br>
+&nbsp;&nbsp;padding-left: .25em;<br>
+&nbsp;&nbsp;padding-right: .25em;<br>
+&nbsp;&nbsp;width: 1em;<br>
+&nbsp;&nbsp;font-weight: bold;<br>
+&nbsp;&nbsp;height: 100%;<br>
+&nbsp;&nbsp;border: 2px solid black;<br>
+}<br>
+<br>
+ul.buttons li[aria-pressed="true"] {<br>
+&nbsp;&nbsp;border-top: black 3px solid;<br>
+&nbsp;&nbsp;border-left: black 3px solid;<br>
+&nbsp;&nbsp;border-bottom: black 1px solid;<br>
+&nbsp;&nbsp;border-right:&nbsp;&nbsp;black 1px solid;<br>
+&nbsp;&nbsp;<br>
+}<br>
+<br>
+ul.buttons li[aria-pressed="false"] {<br>
+&nbsp;&nbsp;border-top: black 1px solid;<br>
+&nbsp;&nbsp;border-left: black 1px solid;<br>
+&nbsp;&nbsp;border-bottom: black 3px solid;<br>
+&nbsp;&nbsp;border-right: black 3px solid;<br>
+&nbsp;&nbsp;<br>
+}<br>
+<br>
+ul.buttons li[aria-pressed="true"]:focus,<br>
+ul.buttons li[aria-pressed="true"]:active{<br>
+&nbsp;&nbsp;border-top: #CCCCCC 3px solid;<br>
+&nbsp;&nbsp;border-left: #CCCCCC 3px solid;<br>
+&nbsp;&nbsp;border-bottom: #CCCCCC 1px solid;<br>
+&nbsp;&nbsp;border-right:&nbsp;&nbsp;#CCCCCC 1px solid;<br>
+&nbsp;&nbsp;color: white;<br>
+&nbsp;&nbsp;background-color: black;<br>
+&nbsp;&nbsp;<br>
+}<br>
+<br>
+ul.buttons li[aria-pressed="false"]:focus,<br>
+ul.buttons li[aria-pressed="false"]:active{<br>
+&nbsp;&nbsp;border-top: #CCCCCC 1px solid;<br>
+&nbsp;&nbsp;border-left: #CCCCCC 1px solid;<br>
+&nbsp;&nbsp;border-bottom: #CCCCCC 3px solid;<br>
+&nbsp;&nbsp;border-right: #CCCCCC 3px solid;<br>
+&nbsp;&nbsp;color: white;<br>
+&nbsp;&nbsp;background-color: black;<br>
+&nbsp;&nbsp;<br>
+}<br>
+<br>
+.italic {<br>
+&nbsp;&nbsp;font-style: italic;<br>
+} <br>
+<br>
+.bold {<br>
+&nbsp;&nbsp;font-weight: bold;<br>
+}<br>
+<br>
+ul.buttons{<br>
+&nbsp;&nbsp;font-weight: bold;<br>
+}<br>
+<br>
+textarea.example {<br>
+&nbsp;&nbsp;clear: both;<br>
+&nbsp;&nbsp;padding: .25em;<br>
+&nbsp;&nbsp;width: 50%;<br>
+&nbsp;&nbsp;height: 200px;<br>
+}<br>
+<br>
+.hide {<br>
+position: absolute;<br>
+top: -20em;<br>
+left: -200em;<br>
+} <br>
+
+    </div>
+    
+    
+    
+    <h2>Javascript Source Code</h2>
+    <div class="code">
+        <br>
+var KEY_ENTER = 13;<br>
+var KEY_SPACE = 32;<br>
+<br>
+$(document).ready(function() {<br>
+<br>
+&nbsp;&nbsp;$('ul.buttons li').mousedown(function(event) {<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;var ariaControls = '#' + $(this).attr('aria-controls');<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;switch($(this).attr('aria-labelledby')) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case 'italic_label': {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$(ariaControls).toggleClass('italic');<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case 'bold_label': {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$(ariaControls).toggleClass('bold');<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case 'larger_label': {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;increaseFontSize(ariaControls);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case 'smaller_label': {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;decreaseFontSize(ariaControls);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;} // end switch<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;if ($(this).hasClass('toggleButton') == true) {<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// This is a toggle button: toggle aria-pressed state<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;togglePressed(this);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;else<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// This is a momentary pushbutton: Set aria-pressed to true<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$(this).attr('aria-pressed', 'true');<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;$(this).focus();<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;event.stopPropagation();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return false;<br>
+&nbsp;&nbsp;}); // end button click handler<br>
+<br>
+&nbsp;&nbsp;// bind a mouseup handler to the buttons to enable momentary pushbuttons<br>
+&nbsp;&nbsp;// to return to unpressed state and toggle buttons to remain pressed<br>
+&nbsp;&nbsp;// <br>
+&nbsp;&nbsp;$('ul.buttons li').mouseup(function(event) {<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;if ($(this).hasClass('toggleButton') == false) {<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Set aria-pressed to false<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$(this).attr('aria-pressed', 'false');<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;event.stopPropagation();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return false;<br>
+&nbsp;&nbsp;}); // end mouseup handler<br>
+<br>
+&nbsp;&nbsp;// keypress handler<br>
+&nbsp;&nbsp;//<br>
+&nbsp;&nbsp;// The Opera browser detects keystrokes to perform window manipulation during the keypress event,<br>
+&nbsp;&nbsp;// not keydown like IE, Firefox, and Safari. Relevant keypresses are consumed by this handler to<br>
+&nbsp;&nbsp;// make the browser behave properly when the user is manipulating the buttons.<br>
+&nbsp;&nbsp;//<br>
+&nbsp;&nbsp;$('ul.buttons li').keypress(function(event) {<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;switch (event.which) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case KEY_ENTER:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case KEY_SPACE: {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;event.stopPropagation;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return false;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;} //end switch<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return true;<br>
+&nbsp;&nbsp;});<br>
+<br>
+&nbsp;&nbsp;$('ul.buttons li').keydown(function(event) {<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;var ariaControls = '#' + $(this).attr('aria-controls');<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;switch (event.which) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case KEY_ENTER:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case KEY_SPACE: {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;switch($(this).attr('aria-labelledby')) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case 'italic_label': {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$(ariaControls).toggleClass('italic');<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case 'bold_label': {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$(ariaControls).toggleClass('bold');<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case 'larger_label': {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;increaseFontSize(ariaControls);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case 'smaller_label': {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;decreaseFontSize(ariaControls);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} // end switch<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if ($(this).hasClass('toggleButton') == true) {<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// This is a toggle button: toggle aria-pressed state<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;togglePressed(this);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// This is a momentary pushbutton: Set aria-pressed to true<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$(this).attr('aria-pressed', 'true');<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;event.stopPropagation();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return false;<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} // end case<br>
+&nbsp;&nbsp;&nbsp;&nbsp;} // end switch<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return true;<br>
+&nbsp;&nbsp;}); // end button click handler<br>
+<br>
+&nbsp;&nbsp;// bind a keyup handler to the buttons to enable momentary pushbuttons<br>
+&nbsp;&nbsp;// to return to unpressed state and toggle buttons to remain pressed<br>
+&nbsp;&nbsp;// <br>
+&nbsp;&nbsp;$('ul.buttons li').keyup(function(event) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;id = this;<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;switch (event.which) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case KEY_ENTER:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case KEY_SPACE: {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if ($(this).hasClass('toggleButton') == false) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// set aria-pressed to false<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$(id).attr('aria-pressed', 'false');<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;event.stopPropagation();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return false;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} // end case<br>
+&nbsp;&nbsp;&nbsp;&nbsp;} // end switch<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return true;<br>
+&nbsp;&nbsp;}); // end mouseup handler<br>
+<br>
+&nbsp;&nbsp;/**<br>
+&nbsp;&nbsp; * increaseFontSize() increases the font size for the controlled area<br>
+&nbsp;&nbsp; *<br>
+&nbsp;&nbsp; * @param (ariaControls) id of text area to modify<br>
+&nbsp;&nbsp; *<br>
+&nbsp;&nbsp; * @return N/A<br>
+&nbsp;&nbsp; */<br>
+&nbsp;&nbsp;function increaseFontSize(ariaControls) {<br>
+&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;var $text = $(ariaControls);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;var fontSize = parseFloat($text.css('fontSize'), 10);<br>
+&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;// increase the font size<br>
+&nbsp;&nbsp;&nbsp;&nbsp;fontSize *= 1.4;<br>
+&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;if (fontSize &gt; 120) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;// write the new value to the css property<br>
+&nbsp;&nbsp;&nbsp;&nbsp;// note: 'px' must be appended for valid css<br>
+&nbsp;&nbsp;&nbsp;&nbsp;$text.css('fontSize', fontSize+'px');<br>
+&nbsp;&nbsp;} // end increaseFontSize()<br>
+&nbsp;&nbsp;<br>
+&nbsp;&nbsp;/**<br>
+&nbsp;&nbsp; * decreaseFontSize() decreases the font size for the controlled area<br>
+&nbsp;&nbsp; *<br>
+&nbsp;&nbsp; * @param (ariaControls) id of text area to modify<br>
+&nbsp;&nbsp; *<br>
+&nbsp;&nbsp; * @return N/A<br>
+&nbsp;&nbsp; */<br>
+&nbsp;&nbsp;function decreaseFontSize(ariaControls) {<br>
+&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;var $text = $(ariaControls);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;var fontSize = parseFloat($text.css('fontSize'), 10);<br>
+&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;// increase the font size<br>
+&nbsp;&nbsp;&nbsp;&nbsp;fontSize /= 1.4;<br>
+&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;if (fontSize &lt; 4) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;// write the new value to the css property<br>
+&nbsp;&nbsp;&nbsp;&nbsp;// note: 'px' must be appended for valid css<br>
+&nbsp;&nbsp;&nbsp;&nbsp;$text.css('fontSize', fontSize+'px');<br>
+&nbsp;&nbsp;<br>
+&nbsp;&nbsp;} // end decreaseFontSize<br>
+&nbsp;&nbsp;<br>
+&nbsp;&nbsp;/**<br>
+&nbsp;&nbsp; * togglePressed() toggles the aria-pressed atribute between true or false<br>
+&nbsp;&nbsp; *<br>
+&nbsp;&nbsp; * @param ( id object) button to be operated on<br>
+&nbsp;&nbsp; *<br>
+&nbsp;&nbsp; * @return N/A<br>
+&nbsp;&nbsp; */<br>
+&nbsp;&nbsp;function togglePressed(id) {<br>
+&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;// reverse the aria-pressed state<br>
+&nbsp;&nbsp;&nbsp;&nbsp;if ($(id).attr('aria-pressed') == 'true') {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$(id).attr('aria-pressed', 'false');<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;else {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$(id).attr('aria-pressed', 'true');<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;}<br>
+<br>
+}); // end ready<br>
+
+    </div>
+    
+    
+</div>
+
+
+    
+  </div>  
+  
+  <div id="footer" role="contentinfo">
+    
+    <h2>Administration Links</h2>
+    <ul>
+      <li><a href="http://www.openajax.org/member/wiki/MemberWiki:Privacy_policy">Privacy Policy</a></li>
+      <li><a href="http://www.openajax.org/member/wiki/MemberWiki:General_disclaimer">Disclaimers</a></li>
+      <li><a href="http://validator.w3.org/check?uri=referer">Validate Markup with W3C Validator</a></li>
+    </ul>
+    
+    <div class="copyright">
+      © 2015 The Board of Trustees at the University of Illinois
+    </div>     
+    
+  </div>  
+
+
+</body></html>

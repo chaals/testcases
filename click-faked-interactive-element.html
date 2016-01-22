@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html><head>
+<title>Test for noninteractive events getting click events</title>
+</head><body>
+<p role="button" id="fakeButton" tabindex="0">Faked button</p>
+<p><button id="realButton">Real Button</button>
+<p id="theResult" onclick="this.innerHTML=''" onkeydown="this.innerHTML=''" tabindex="0">
+<script>
+function handleIt() {
+document.querySelector('#theResult').innerHTML = 'clicked';
+}
+
+document.querySelector("#fakeButton").addEventListener('click', handleIt);
+document.querySelector("#realButton").addEventListener('click', handleIt);
+
+
+</script>
+</body></html>
