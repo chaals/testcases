@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>area with null alt - test</title>
+ </head>
+ <body>
+ <h1><code>area</code> with blank / missing <code>alt</code></h1>
+
+ <p>The following image uses an imagemap that contains 5 <code>area</code> elements. The first has no href, and is used to provide an outline shape, the others have respectively a valid <code>alt</code> attribute; blank <code>alt</code> attribute; valid <code>alt</code> attribute; missing <code>alt</code> attribute.</p>
+
+ <p> <img src="shapes.png" usemap="#theMap" alt="Four shapes each link to one of two different places">
+  <map name="theMap">
+  <area shape=rect coords="50,50,100,100"> <!-- the hole in the red box -->
+  <area shape=rect coords="25,25,125,125" href="one.html" alt="One">
+  <area shape=circle coords="200,75,50" href="two.html" alt="">
+  <area shape=poly coords="325,25,262,125,388,125" href="two.html" alt="Two">
+  <area shape=poly coords="450,25,435,60,400,75,435,90,450,125,465,90,500,75,465,60"
+        href="one.html">
+  </map></p> 
+  <p>To pass, the user must be able to determine the target of each link</p>
+
+<h2>Results</h2>
+<h3>On Mac OS 10.10, using VoiceOver</h3>
+<p>Yandex.browser 16.2 (chromium-based), Safari 9.03 and Firefox 44 all fail to match the links with blank alt to those with valid alt, and instead VoiceOver presents the target of the link. In the case of the missing <code>alt</code> attribute with Firefox Voiceover presents the absolute URL of the link - in all other cases, it presents the actual content of the <code>href</code> attribute.</p>
+<p>With Firefox Voiceover incorrectly notes the presence of the first <code>area</code> element as representing a link.</p>
+
+<h3>Mac OS 10.10, visually</h3>
+<p>Neither Yandex.browser 16.2, Safari 9.03 nor Firefox 44 present the information in the <code>alt</code> attribute
+</body>
