@@ -34,4 +34,69 @@
 <h3>Windows 11, JAWS 17 Beta</h3>
 <p>IE 11 behaves as described for Yandex and Safari above.</p>
 <p>Firefox 44 using the arrow keys for navigation gives the sequence "Image map link rect, Image map link One, Image map link circle, Image map link two, Image map link http://chaals.github.io/testcases...". When using the tab key instead it gives "Rect image map, one image map, Circle image map, two image map poly, Poly image map".</p>
+
+<h3>Windows 10, NVDA2016.1:</h3>
+ 
+<p>NVDA seems to require focus mode to be enabled in order to interact with an
+imagemap. Focus mode is not enabled automatically when using the up/down
+cursor keys, only when using the tab key to navigate content.
+ 
+<p>FF44:
+ 
+When using up.down cursor keys to navigate, NVDA announces "Graphic four
+shapes are each links four shapes are each links".
+ 
+When tabbing forward through the content, NVDA announces "Link rect", "One
+link rect", "Link circle", "Two link poly".
+ 
+When (shift) tabbing backwards through the content, NVDA encounters a silent
+tab stop immediately after "Link rect".</p>
+ 
+<p>IE11:
+ 
+When using up/down cursor keys to navigate, NVDA announces "Graphic four
+shapes are each links link link one link link link two 2 link".
+ 
+When tabbing forwards or backwards through the content, NVDA encounters a
+number (possibly four) of silent tab stops.</p>
+ 
+<h3> Windows 10 and Jaws 17 (latest public patch):</h3>
+ 
+<p>FF44:
+ 
+Jaws has mishandled imagemaps in Firefox for some time. It announces each
+area of the map as a static graphic, then again as an interactive link.</p>
+ 
+<p>When using the up/down cursor keys to navigate, Jaws announces "Graphic Four
+shapes are each links", "Graphic rect", "Graphic One", "Graphic circle",
+"Graphic Two", "Graphic http://chaals.github.io/testcases/45796.html",
+"Image Map Link rect", "Image Map Link One", "Image Map Link circle", "Image
+Map Link Two", "Image Map Link
+http://chaals.github.io/testcases/45796.html".</p>
+ 
+<p>When tabbing forwards through the content, Jaws announces "Four shapes are
+each links Graphic", "rect image map", "One image map", "circle Image Map
+Link Graphic", "Two Image Map Link Graphic", "poly", "poly Image Map".</p>
+ 
+<h4>IE11:</h4>
+ 
+<p>When using up/down cursor keys to navigate, Jaws announces "Graphic Four
+shapes are each links", "Image Map Link 36", "Image Map Link One", "Image
+Map Link testcases/45679", "Image Map Link Two", "Image Map Link
+testcases/45796".</p>
+ 
+<p>When tabbing forwards through the content, Jaws announces "One Image Map
+Link", "testcases/45679 Image Map Link", "Two Image Map Link", "link to
+two", "testcases/45796 Image Map Link".</p>
+ 
+<h2>Windows 10 and Narrator:</h2>
+ 
+<p>Narrator does not use the tab key for navigation (it uses the caps lock key
+as modifier, with the up/down/left/right cursor keys).</p>
+ 
+<p>Edge:
+ 
+When using the modifier and left/right cursor keys to navigate, Narrator
+announces "Four shapes are each links graphic", "Link", "One link", "Link to
+two", "Link".</p>
 </body>
