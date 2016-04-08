@@ -1,0 +1,74 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+<meta charset="utf-8">
+<title>figcaption anywhere</title>
+
+</head>
+
+<body>
+<h1>Case: figcaption</h1>
+
+<p>The HTML specification states that the contexts in which the <a href="http://w3c.github.io/html/grouping-content.html#elementdef-figcaption"><code>&lt;figcaption&gt;</code></a> element can be used are:</p>
+
+<blockquote cite="http://w3c.github.io/html/grouping-content.html#elementdef-figcaption">
+"As the first or last child of a figure element."</blockquote>
+
+<section>
+ <h2>"Null case" example</h2>
+ <p>In this case there is a just paragraph of text and a separate paragraph containing two images, one with <code>alt="one"</code>, one with <code>alt=""</code>, and one without an <code>alt</code> attribute.</p>
+ <div class="example">
+  <p>A null case example</p>
+  <p><img src="borken" alt="one"><img src="borken" alt=""><img src="borken"></p>
+ </div>
+
+ <p>This is to determine how a given browser "normally" treats the images, when they are not part of a <code>figure</code>, for comparison.</p>
+</section>
+
+<section>
+ <h2>Currently conformant <code>figure</code>: <code>figcaption</code> as the first child</h2>
+ <p>A  <code>figure</code> has a <code>figcaption</code> as the first child, then a separate paragraph containing two images, one with <code>alt="one"</code>, one with <code>alt=""</code>, and one without an <code>alt</code> attribute.</p>
+
+ <div class="example">
+  <figure>
+   <figcaption>A compliant example</figcaption>
+   <p><img src="borken" alt="one"><img src="borken" alt=""><img src="borken"></p>
+  </figure>
+ </div>
+
+ <p>Browsers should give "a compliant example" as the textual alternative for the figure.</p>
+</section>
+
+<section>
+ <h2>Another currently conformant <code>figure</code>: <code>figcaption</code> as the last child</h2>
+ <p>A <code>figure</code> has a paragraph containing two images, one with <code>alt="one"</code>, one with <code>alt=""</code>, and one without an <code>alt</code> attribute, then a <code>figcaption</code> as the last child.</p>
+
+ <div class="example">
+  <figure>
+   <p><img src="borken" alt="one"><img src="borken" alt=""><img src="borken"></p>
+   <figcaption>A compliant example</figcaption>
+  </figure>
+ </div>
+
+ <p>Browsers should give "a compliant example" as the textual alternative for the figure.</p>
+</section>
+
+<section>
+ <h2>Test case for <code>figcaption</code> between two images</h2>
+
+ <p>In this case the <code>figure</code> element contains a paragraph of three images, with <code>alt</code> respectively "one", "" i.e. empty, and mossing
+
+ <div class="example">
+  <figure>
+   <p><img src="borken" alt="one"><img src="borken" alt=""><img src="borken"></p>
+   <figcaption>A rebellious example</figcaption>
+   <p><img src="borken" alt="one"><img src="borken" alt=""><img src="borken"></p>
+  </figure>
+ </div>
+
+</section>
+
+</body>
+</html>
