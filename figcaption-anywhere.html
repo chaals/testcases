@@ -11,30 +11,31 @@
 <body>
 <h1>Case: figcaption</h1>
 
-<p>The HTML specification states that the contexts in which the <a href="http://w3c.github.io/html/grouping-content.html#elementdef-figcaption"><code>&lt;figcaption&gt;</code></a> element can be used are:</p>
+<p>The HTML 5 specification states that a <a href="https://www.w3.org/TR/html5/grouping-content.html#the-figure-element"><code>figure</code> element may have zero or one <code>&lt;figcaption&gt;</code> children</a>, which must be the first or last child of a figure element.</p>
 
-<blockquote cite="http://w3c.github.io/html/grouping-content.html#elementdef-figcaption">
-"As the first or last child of a figure element."</blockquote>
+<p>This page provides some tests to determine whether there is any reason to make the restriction on either number or placement of <code>figcaption</code> children of a <code>figure</code> element, based on interoperability requirements.</p>
 
 <section>
  <h2>"Null case" example</h2>
- <p>In this case there is a just paragraph of text and a separate paragraph containing two images, one with <code>alt="one"</code>, one with <code>alt=""</code>, and one without an <code>alt</code> attribute.</p>
+ <p>In this case there is a paragraph of text, a second paragraph containing three images that won't load, one with <code>alt="one"</code>, one with a null <code>alt</code> value <code>""</code>, and one without an <code>alt</code> attribute, and a third paragraph containing three valid images with the same <code>alt</code> values.</p>
  <div class="example">
   <p>A null case example</p>
   <p><img src="borken" alt="one"><img src="borken" alt=""><img src="borken"></p>
+  <p><img src="shapes.png" alt="one"><img src="shapes.png" alt=""><img src="shapes.png"></p>
  </div>
 
- <p>This is to determine how a given browser "normally" treats the images, when they are not part of a <code>figure</code>, for comparison.</p>
+ <p>This is to determine how a given browser "normally" treats the images, when they are not part of a <code>figure</code>, for comparison with the figure examples.</p>
 </section>
 
 <section>
  <h2>Currently conformant <code>figure</code>: <code>figcaption</code> as the first child</h2>
- <p>A  <code>figure</code> has a <code>figcaption</code> as the first child, then a separate paragraph containing two images, one with <code>alt="one"</code>, one with <code>alt=""</code>, and one without an <code>alt</code> attribute.</p>
+ <p>A  <code>figure</code> has a <code>figcaption</code> as the first child, a second paragraph containing three images that won't load, one with <code>alt="one"</code>, one with a null <code>alt</code> value <code>""</code>, and one without an <code>alt</code> attribute, then a third paragraph containing three valid images with the same <code>alt</code> values.</p>
 
  <div class="example">
   <figure>
    <figcaption>A compliant example</figcaption>
    <p><img src="borken" alt="one"><img src="borken" alt=""><img src="borken"></p>
+   <p><img src="shapes.png" alt="one"><img src="shapes.png" alt=""><img src="shapes.png"></p>
   </figure>
  </div>
 
@@ -43,30 +44,77 @@
 
 <section>
  <h2>Another currently conformant <code>figure</code>: <code>figcaption</code> as the last child</h2>
- <p>A <code>figure</code> has a paragraph containing two images, one with <code>alt="one"</code>, one with <code>alt=""</code>, and one without an <code>alt</code> attribute, then a <code>figcaption</code> as the last child.</p>
+ <p>A  <code>figure</code> has a paragraph containing three images that won't load, one with <code>alt="one"</code>, one with a null <code>alt</code> value <code>""</code>, and one without an <code>alt</code> attribute, a second paragraph containing three valid images with the same <code>alt</code> values, and a <code>figcaption</code> as the last child.</p>
 
  <div class="example">
   <figure>
-   <p><img src="borken" alt="one"><img src="borken" alt=""><img src="borken"></p>
-   <figcaption>A compliant example</figcaption>
+   <p><img src="borken" alt="one"> <img src="borken" alt=""> <img src="borken"></p>
+   <p><img src="shapes.png" alt="one"> <img src="shapes.png" alt=""> <img src="shapes.png"></p>
+   <figcaption>Another compliant example</figcaption>
   </figure>
  </div>
 
- <p>Browsers should give "a compliant example" as the textual alternative for the figure.</p>
+ <p>Browsers should provide "Another compliant example" as the textual alternative for the entire <code>figure</code>.</p>
+</section>
+
+<section>
+ <h2>A <code>figcaption</code> between two images</h2>
+
+ <p>This example is invalid markup according to HTML5</p>
+
+ <p>A  <code>figure</code> has a paragraph containing three images that won't load, one with <code>alt="one"</code>, one with a null <code>alt</code> value <code>""</code>, and one without an <code>alt</code> attribute, a <code>figcaption</code> as the middle child element, then a third paragraph containing three valid images with the same <code>alt</code> values as before.</p>
+
+ <div class="example">
+  <figure>
+   <p><img src="borken" alt="one"> <img src="borken" alt=""> <img src="borken"></p>
+   <figcaption>A rebellious example</figcaption>
+   <p><img src="shapes.png" alt="one"><img src="shapes.png" alt=""><img src="shapes.png"></p>
+   <figcaption>Another compliant example</figcaption>
+  </figure>
+ </div>
+
+ <p>Browsers should provide "A rebellious example" as an alternative for the figure, but code checkers should report an error</p>
+
 </section>
 
 <section>
  <h2>Test case for <code>figcaption</code> between two images</h2>
 
- <p>In this case the <code>figure</code> element contains a paragraph of three images, with <code>alt</code> respectively "one", "" i.e. empty, and mossing
+ <p>This example is invalid markup according to HTML5</p>
+
+ <p>A <code>figure</code> has a paragraph containing three images that won't load, one with <code>alt="one"</code>, one with a null <code>alt</code> value <code>""</code>, and one without an <code>alt</code> attribute, then a <code>figcaption</code> containing the text "A more rebellious example" as the second child, a <code>figcaption</code> containing the text "Increased lack of respect" as the third child, and finally a second paragraph containing three valid images, with the same set of <code>alt</code> values as before.</p>
 
  <div class="example">
   <figure>
-   <p><img src="borken" alt="one"><img src="borken" alt=""><img src="borken"></p>
-   <figcaption>A rebellious example</figcaption>
-   <p><img src="borken" alt="one"><img src="borken" alt=""><img src="borken"></p>
+   <p><img src="borken" alt="one"> <img src="borken" alt=""> <img src="borken"></p>
+   <figcaption>A more rebellious example</figcaption>
+   <figcaption>Increased lack of respect</figcaption>
+   <p><img src="shapes.png" alt="one"><img src="shapes.png" alt=""><img src="shapes.png"></p>
+   <figcaption>Another compliant example</figcaption>
   </figure>
  </div>
+
+ <p>Browsers should provide "A rebellious example" - without recognising the second <code>figcaption</code> as an alternative for the figure, but code checkers should report an error because the <code>figcaption</code>s are not first or last, and because there are two of them.</p>
+
+</section>
+
+<section>
+ <h2>Two <code>figcaption</code> elements, first and last as per HTML 5</h2>
+
+ <p>This example is invalid markup according to HTML5</p>
+
+ <p>A <code>figure</code> has  a <code>figcaption</code> containing the text "This could be great", a paragraph containing three images that won't load, one with <code>alt="one"</code>, one with a null <code>alt</code> value <code>""</code>, and one without an <code>alt</code> attribute, as the second child, a second paragraph containing three valid images, with the same set of <code>alt</code> values as before as the third child, and finally a <code>figcaption</code> containing the text "Right place, wrong time".</p>
+
+ <div class="example">
+  <figure>
+   <figcaption>This should be great</figcaption>
+   <p><img src="borken" alt="one"> <img src="borken" alt=""> <img src="borken"></p>
+   <p><img src="shapes.png" alt="one"><img src="shapes.png" alt=""><img src="shapes.png"></p>
+   <figcaption>Right place, wrong time</figcaption>
+  </figure>
+ </div>
+
+ <p>Browsers should provide "This should be great" - without recognising the second <code>figcaption</code> as an alternative for the figure. Code checkers should report an error because there are two <code>figcaption</code>s.</p>
 
 </section>
 
