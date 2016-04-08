@@ -20,6 +20,12 @@
 <p>This page provides some tests to determine whether there is any reason to make the restriction on either number or placement of <code>figcaption</code> children of a <code>figure</code> element, based on interoperability requirements.</p>
 
 <section>
+<h2>Results</h2>
+
+<p><strong>Rough, obviously</strong>. All results on Mac OS 10.10.5 using VoiceOver. Safari 9.1 seems not to implement figure at all. Yandex 16.3 and Firefox 45 both report the figure, respectively as a figure and a group. They include text alternatives for individual images, and all <code>figcaption</code> elements found as children anywhere in the <code>figure</code>, as the text alternative for the figure.</p>
+</section>
+<section>
+
  <h2>"Null case" example</h2>
  <p>In this case there is a paragraph of text, a second paragraph containing three images that won't load, one with <code>alt="one"</code>, one with a null <code>alt</code> value <code>""</code>, and one without an <code>alt</code> attribute, and a third paragraph containing three valid images with the same <code>alt</code> values.</p>
  <div class="example">
