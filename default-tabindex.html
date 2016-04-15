@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>Default tabindex value - test</title>
+  <script>
+   function toggle(theName) {
+     theBox=document.querySelector(('#'+theName));
+     if (theBox.checked)
+       theBox.removeAttribute('checked');
+     else
+       theBox.setAttribute('checked', true);
+   }
+  </script>
+ </head>
+ <body>
+ <h1>What is default tabindex value</h1>
+
+ <p>The following test determines the default tabindex value for some elements that are active by default, and some elements that are inactive by default</p>
+
+<form>
+<p id="zero"><input id="one" type="text"> <label for="one" id="two">try a label</label></p>
+<p> <input type='checkbox' id="three"> <span id="four" accesskey="1"  onclick="toggle('three')">Some active <code>span</code></span></p>
+<p> <input type='date' id="five"> <span id="six" accesskey="2">An inactive span</span></p>
+<p> <a href="http://w3.org" id="seven">A link</a></p>
+<p> <a href="http://w3.org" id="eight" tabindex="1">A link</a></p>
+<p><output id="output"></output></p>
+</form>
+
+<script>
+  myList = ["one", "two", "three", "four", "five", "six", "seven", "eight"];
+  for (i=0;i<myList.length;i++) {
+    document.forms[0].output.innerHTML += myList[i] + ": " + (document.querySelector('#'+myList[i]).tabIndex) + ", ";
+  } 
+</script>
+
+<h2>Results</h2>
+<h3>On OS @@</h3>
+<p>With browser blabla…</p>
+</body>
+</html>
