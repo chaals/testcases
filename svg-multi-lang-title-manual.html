@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>SVG titles in different languages test</title>
+</head><body>
+<svg viewBox="0 0 400 200" width="20em">
+  <desc>This example uses the lang attribute element to provide multiple
+  text alternatives.</desc>
+  <circle r="50" cx="50" cy="100">
+    <title lang="jp">これは日本語です</title>
+    <title lang="ru">Вот что-то по-русски</title>
+    <title lang="en">This is english</title>
+    <title>Voici français, le defaut</title>
+  </circle>
+  <circle r="50" cx="150" cy="100" fill="gold">
+   <switch>
+    <title systemLanguage="jp">これは日本語です</title>
+    <title systemLanguage="ru">Вот что-то по-русски</title>
+    <title systemLanguage="en">This is english</title>
+    <title>Voici français, le defaut</title>
+   </switch>
+  </circle>
+  <circle r="50" cx="250" cy="100" fill="blue">
+    <title systemLanguage="jp">これは日本語です</title>
+    <title systemLanguage="ru">Вот что-то по-русски</title>
+    <title systemLanguage="en">This is english</title>
+    <title>Voici français, le defaut</title>
+  </circle>
+  <switch>
+   <circle r="50" cx="350" cy="100" fill="red">
+    <title systemLanguage="jp">これは日本語です</title>
+    <title systemLanguage="ru">Вот что-то по-русски</title>
+    <title systemLanguage="en">This is english</title>
+    <title>Voici français, le defaut</title>
+   </circle>
+  </switch>
+</svg>
+</body></html>
