@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="utf-8">
+  <title>style scoped - test</title>
+ </head>
+ <body>
+ <h1><code>style scoped</code> test</h1>
+
+ <p>The following test is to see if there is support for <code>style scoped</code></p>
+
+ <article>
+  <h1>Style Scoped</h1>
+  <p>The scoped attribute for the style element will eventually allow for you to include style elements mid-document. To do this, you must mark up your style element with the scoped attribute.</p>
+  <section>
+    <style scoped>
+      p { color: red; }
+      P::after { content: "You get a suffix"} 
+    </style>
+    <h2>How does it work?</h2>
+    <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+  </section>
+  <p>If only the preceeding paragraph is red and the last words are "You get a suffix", the attribute is supported.</p> 
+<p>If more paragraphs are red, and finish with the text "You get a suffix" the attribute is unsupported.</p>
+</article>
+
+<h2>Results</h2>
+<h3>On Max OS 10.10</h3>
+<p>With browser Yandex 16.3 and Opera 36.0 (blink-based) and Safari 9.1 (webkit-based) the attribute is unsupported</p>
+<p>Firefox 45 supports the attribute.</p>
+</body>
+</html>
