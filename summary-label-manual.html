@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="utf-8">
+  <title>label / summary test</title>
+ </head>
+ <body>
+ <h1>label summary test</h1>
+
+ <p>This tests whether you can use a <code>label</code> element for a <code>summary</code> element inside <code>details</code>, e.g. to provide a bigger clearer target for showing the details</p>
+
+<details>
+  <input id="anonymous-control">
+  <summary id="summary-anonymous-control">
+    <label for="summary-anonymous-control">label text</label>
+  </summary>
+  Some content 
+</details>
+
+<p>To pass, it should be possible to open the summary by clicking on or otherwise activating the text label "label text" - not just the disclosure widget typically rendered as a triangle.</p>
+
+<h2>Results</h2>
+<h3>Mac OS 10.10, Yandex 16.4 and Safari 9.1</h3>
+<p>The label doesn't activate the control</p>
+<h3>Firefox 45</h3>
+<p>Doesn't implement <code>summary</code>/<code>details</code> so it unsurprisingly doesn't work</p>
+
+</body>
+</html>
