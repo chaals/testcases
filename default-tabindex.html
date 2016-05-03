@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
  <head>
+  <meta charset="utf-8">
   <title>Default tabindex value - test</title>
   <script>
    function toggle(theName) {
@@ -18,16 +19,18 @@
  <p>The following test determines the default tabindex value for some elements that are active by default, and some elements that are inactive by default</p>
 
 <form>
-<p id="zero"><input id="one" type="text"> <label for="one" id="two">try a label</label></p>
-<p> <input type='checkbox' id="three"> <span id="four" accesskey="1"  onclick="toggle('three')">Some active <code>span</code></span></p>
-<p> <input type='date' id="five"> <span id="six" accesskey="2">An inactive span</span></p>
-<p> <a href="http://w3.org" id="seven">A link</a></p>
-<p> <a href="http://w3.org" id="eight" tabindex="1">A link</a></p>
+<p id="zero">0, a paragraph, 1, a text input, <input id="one" type="text"> <label for="one" id="two">2, a label</label></p>
+<p>3, a checkbox <input type='checkbox' id="three"> <span id="four" accesskey="1"  onclick="toggle('three')">4, a <code>span</code> with an <code>onclick</code> function and an <code>accesskey</code> </span></p>
+<p>5, a date input <input type='date' id="five">, <span id="six" accesskey="2">6, a span with an <code>accesskey</code></span></p>
+<p> <a href="http://w3.org" id="seven">7, a link</a></p>
+<p> <a href="http://w3.org" id="eight" tabindex="0">8, a link with <code>tabindex="0"</p>
+<p> <a href="http://w3.org" id="nine" tabindex="-1">9, a link with <code>tabindex="-1"</code></a></p>
+<h3>The tabindex values</h3>
 <p><output id="output"></output></p>
 </form>
 
 <script>
-  myList = ["one", "two", "three", "four", "five", "six", "seven", "eight"];
+  myList = ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine"];
   for (i=0;i<myList.length;i++) {
     document.forms[0].output.innerHTML += myList[i] + ": " + (document.querySelector('#'+myList[i]).tabIndex) + ", ";
   } 
