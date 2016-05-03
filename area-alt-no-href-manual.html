@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="utf-8">
+  <title>Area with alt and no href manual test: what happens</title>
+ </head>
+ <body>
+ <h1><code>&lt;area&gt;</code> with <code>alt</code> not <code>href</code> test</h1>
+
+ <p>This tests what happens when an <code>&lt;area&gt;</code> element doesn't have a text alternative. Is there a way to discover it, and the fact that it is not linked?</p>
+
+ <p>It should be possible to identify a red square, and a hole as part of the following paragraph. According to the specification there should be a link to green.html, followed by a link to "green circle".</p>
+
+ <p>Please select a shape: <img src="shapes.png" usemap="#shapes"
+   alt="Four shapes: a red hollow box, a green circle, a blue triangle,
+   and a yellow four-pointed star.">
+  <map name="shapes">
+    <area shape=circle coords="200,75,10" href="green.html">
+    <area shape=circle coords="200,75,30">
+    <area shape=circle coords="200,75,50" alt="Green circle." href="green.html">
+    <area shape=rect coords="50,50,100,100" alt="a hole"> <!-- the hole in the red box -->
+    <area shape=rect coords="25,25,125,125" href="red.html" alt="Red box.">
+    <area shape=poly coords="325,25,262,125,388,125" href="blue.html" alt="Blue triangle.">
+    <area shape=poly coords="450,25,435,60,400,75,435,90,450,125,465,90,500,75,465,60"
+        href="yellow.html" title="Yellow star.">
+  </map>
+</p>
+
+</body>
+</html>
