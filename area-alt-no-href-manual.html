@@ -26,5 +26,16 @@
   </map>
 </p>
 
+<h2>Discussion</h2>
+<p>The current <a href="https://w3c.github.io/html/semantics-embedded-content.html#embedded-content-image-maps">HTML 5.1 specification for image maps</a> mandates in its <a href="https://w3c.github.io/html/semantics-embedded-content.html#image-maps-processing-model">processing model</a> that:</p>
+<dl>
+  <dt><code>area</code>s are assigned space on the image in DOM order, so an <code>area</code> cannot "claim" a space already declared as part of an earlier <code>area</code> in the map</dt>
+  <dd>This seems to work commonly</dd>
+  <dt><code>area</code>s whose <code>href</code> duplicates that of an <code>area</code> already declared are not presented to the user as a text link</dt>
+  <dd>This doesn't seem to happen</dd>
+  <dt><code>area</code>s with no <code>href</code> are not presented to a user as a text link</dt>
+  <dd>This seems to be patchy</dd>
+</dl>
+
 </body>
 </html>
