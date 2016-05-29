@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8">
+  <title>translate on button element - test</title>
+ </head>
+ <body>
+ <h1><code>traslate</code> attribute on <code>button</code> element</h1>
+
+ <p>This tests whether translation services respect the <a href=""https://w3c.github.io/html/dom.html#the-translate-attribute><code>translate</code> attribute</a> on the <code>button</code> element. </p>
+
+<form>
+<p>  <input type="submit"> A submit button with default value</p>
+<p>  <input type="submit" value="a plain submit button"></p>
+<p>  <input type="submit" translate="yes"> A submit button with default value and </code>translate="yes"</code></p>
+<p>  <button translate="yes"> A plain button with translate="yes"</button></p>
+<p>  <input type="submit" value="a submit button with translate='yes'" translate="yes"></p>
+<p>  <input type="submit" translate="no"> A submit button with default value and </code>translate="no"</code></p>
+<p>  <input type="submit" value="a submit button with translate='no'" translate="no"></p>
+<p>  <button translate="no"> A plain button with translate="no"</button></p>
+</form>
+
+</body>
+</html>
