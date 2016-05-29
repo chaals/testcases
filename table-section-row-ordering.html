@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="utf-8">
+  <title>Table row construction test</title>
+ </head>
+ <body>
+ <h1>Table row construction</h1>
+
+ <p>This tests the part of the HTML table algorithm that specifies the ordering of <code>thead</code>, <code>tfoot</code>, <code>tbody</code>, and plain <code>tr</code> elements in constructing a table.</p>
+
+<table>
+  <tfoot><tr><th>F1</th><td>First footer, first row of source</td></tr></tfoot>
+  <tfoot><tr><th>F2</th><td>Second footer, second row of source</td></tr></tfoot>
+
+  <tbody><tr><th>B1</th><td>First <code>tbody</code>, third row of source</td></tr></tbody>
+  <tbody><tr><th>B2</th><td>Second <code>tbody</code>, fourth row of source</td></tr></tbody>
+
+  <thead><tr><th>H1</th><td>First header, fifth row of source</td></tr></thead>
+  <thead><tr><th>H2</th><td>Second header, sixth row of source</td></tr></thead>
+
+  <tfoot><tr><th>F3</th><td>Third footer, seventh row of source</td></tr></tfoot>
+
+  <tr><th>R1</th><td>First plain row, eighth row of source</td></tr>
+
+  <thead><tr><th>H2</th><td>Third header, ninth row of source</td></tr></thead>
+
+  <tbody><tr><th>B3</th><td>Third <code>tbody</code>, tenth row of source</td></tr></tbody>
+  <tr><th>R2</th><td>Second normal row, eleventh row of source</td></tr>
+  <tbody><tr><th>B4</th><td>Fourth <code>tbody</code>, twelfth row of source</td></tr></tbody>
+
+  <thead><tr><th>H4</th><td>Fourth header, thirteenth row of source</td></tr></thead>
+
+  <tfoot><tr><th>F4</th><td>Fourth footer, fourteenth row of source</td></tr></tfoot>
+</table>
+
+</body>
+</html>
