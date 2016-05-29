@@ -9,6 +9,12 @@
 
  <p>This tests the part of the HTML table algorithm that specifies the ordering of <code>thead</code>, <code>tfoot</code>, <code>tbody</code>, and plain <code>tr</code> elements in constructing a table.</p>
 
+<h2>The test</h2>
+
+<p>The following table is constructed, based on <code>caption</code>, <code>thead</code>, <code>tbody</code>, <code>tfoot</code>, and <code>tr</code> children which appear in the source in the row described.</p> 
+
+<p>Each <code>thead</code>, <code>tbody</code>, and <code>tfoot</code> contains a single <code>tr</code> element</p>
+
 <table>
   <tfoot><tr><th>F1</th><td>First footer, first row of source</td></tr></tfoot>
   <tfoot><tr><th>F2</th><td>Second footer, second row of source</td></tr></tfoot>
@@ -21,18 +27,52 @@
 
   <tfoot><tr><th>F3</th><td>Third footer, seventh row of source</td></tr></tfoot>
 
-  <tr><th>R1</th><td>First plain row, eighth row of source</td></tr>
+  <tr><th>R1</th><td>First direct <code>tr</code> child, eighth row of source</td></tr>
 
-  <thead><tr><th>H2</th><td>Third header, ninth row of source</td></tr></thead>
+  <caption>First caption, ninth child of the <code>table</code></caption>
 
-  <tbody><tr><th>B3</th><td>Third <code>tbody</code>, tenth row of source</td></tr></tbody>
-  <tr><th>R2</th><td>Second normal row, eleventh row of source</td></tr>
-  <tbody><tr><th>B4</th><td>Fourth <code>tbody</code>, twelfth row of source</td></tr></tbody>
+  <caption>Second caption, tenth child of the <code>table</code></caption>
 
-  <thead><tr><th>H4</th><td>Fourth header, thirteenth row of source</td></tr></thead>
+  <thead><tr><th>H2</th><td>Third header, eleventh row of source</td></tr></thead>
 
-  <tfoot><tr><th>F4</th><td>Fourth footer, fourteenth row of source</td></tr></tfoot>
+  <tbody><tr><th>B3</th><td>Third <code>tbody</code>, twelfth row of source</td></tr></tbody>
+  <tr><th>R2</th><td>Second direct <code>tr</code> child, thirteenth row of source</td></tr>
+  <tbody><tr><th>B4</th><td>Fourth <code>tbody</code>, fourteenth row of source</td></tr></tbody>
+
+  <thead><tr><th>H4</th><td>Fourth header, fifteenth row of source</td></tr></thead>
+
+  <tfoot><tr><th>F4</th><td>Fourth footer, sixteenth row of source</td></tr></tfoot>
+
+  <tr><th>R3</th><td>Third direct <code>tr</code> child, seventeenth row of source</td></tr>
 </table>
+
+<h2>More information about the table generated</h2>
+<form>
+<p>The caption: <output id="theCaption"></output></p>
+<p>The Header: <output id="theHeader"></output></p>
+<p>The Footer: <output id="theFooter"></output></p>
+<p>Number of <code>tbody</code>s: <output id="theBodies"></output></p>
+</form>
+
+<script>
+  document.forms[0].theCaption.innerHTML = document.querySelector('table').caption.innerHTML;
+  var headTable = document.createElement('table');
+  headTable.innerHTML = document.querySelector('table').tHead.innerHTML;
+  document.forms[0].theHeader.appendChild(headTable); 
+  var footTable = document.createElement('table');
+  footTable.innerHTML = document.querySelector('table').tFoot.innerHTML;
+  document.forms[0].theFooter.appendChild(footTable); 
+  document.forms[0].theBodies.innerHTML = document.querySelector('table').tBodies.length;
+</script>
+
+<h2>Results</h2>
+<h3>On Mac OS X, 10.10</h3>
+<p>All tested browsers render the first encountered <code>thead</code> at the top of the table, the first <code>tfoot</code> encountered at the end of the table, and all other <code>thead</code>, <code>tbody</code>, <code>tfoot</code>, and direct <code>tr</code> children in the order they are encountered in the source.</p>
+<p>In all tested browsers the <code>caption</code>, <code>tHead</code>, and <code>tFoot</code> DOM attributes match the first element of each type encountered in the source.</p>
+<h4>Yandex.browser 16.4 and Safari 9.1</h4>
+<p>Both <code>caption</code> elements are rendered, at the top of the table</p>
+<h4>Firefox 46</h4>
+<p>Only the first <code>caption</code> element encountered is rendered, at the top of the table</p>
 
 </body>
 </html>
