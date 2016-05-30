@@ -104,6 +104,7 @@
   <dt>Microsoft Edge 25, Microsoft IE 11, on Windows 10</dt>
     <dd>Both <code>caption</code> elements are rendered, at the top of the table</dd>
     <dd>Puts the <code>tr</code> children of <strong>only the first <code>thead</code> child</strong> at the start of <code>table.rows</code>, and the <code>tr</code> children of <strong>only the first <code>tfoot</code> child</strong> at the end of it</dd>
+    <dd>Adds all <code>tbody</code> and direct <code>tr</code> children, and all <code>tfoot</code> and <code>thead</code> children other than the first of each enountered, to <code>table.rows</code> after the <code>tr</code> children of the first <code>thead</code> in the order they are encountered in the source.</dd>
 
   <dt>Firefox 46</dt>
     <dd>Only the first <code>caption</code> element encountered is rendered, at the top of the table</dd>
