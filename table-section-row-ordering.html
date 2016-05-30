@@ -51,28 +51,58 @@
 <p>The caption: <output id="theCaption"></output></p>
 <p>The Header: <output id="theHeader"></output></p>
 <p>The Footer: <output id="theFooter"></output></p>
+<p>First two and last two rows: <output id="firstLast"></output></p>
 <p>Number of <code>tbody</code>s: <output id="theBodies"></output></p>
+<p>Number of rows in <code>table.rows</code>: <output id="theRows"></output></p>
 </form>
 
 <script>
-  document.forms[0].theCaption.innerHTML = document.querySelector('table').caption.innerHTML;
+  var theTable = document.querySelector('table');
+  var numberOfRows = theTable.rows.length;
+
+  document.forms[0].theCaption.innerHTML = theTable.caption.innerHTML;
+
   var headTable = document.createElement('table');
-  headTable.innerHTML = document.querySelector('table').tHead.innerHTML;
+  headTable.innerHTML = theTable.tHead.innerHTML;
   document.forms[0].theHeader.appendChild(headTable); 
+
   var footTable = document.createElement('table');
-  footTable.innerHTML = document.querySelector('table').tFoot.innerHTML;
+  footTable.innerHTML = theTable.tFoot.innerHTML;
   document.forms[0].theFooter.appendChild(footTable); 
-  document.forms[0].theBodies.innerHTML = document.querySelector('table').tBodies.length;
+
+  var firstLastTable = document.createElement('table');
+  firstLastTable.innerHTML = theTable.rows[0].innerHTML;
+  firstLastTable.innerHTML += theTable.rows[1].innerHTML;
+  firstLastTable.innerHTML += theTable.rows[(numberOfRows-2)].innerHTML;
+  firstLastTable.innerHTML += theTable.rows[(numberOfRows-1)].innerHTML;
+  document.forms[0].firstLast.appendChild(firstLastTable); 
+
+  document.forms[0].theBodies.innerHTML = theTable.tBodies.length;
+  document.forms[0].theRows.innerHTML = numberOfRows;
 </script>
 
 <h2>Results</h2>
-<h3>On Mac OS X, 10.10</h3>
-<p>All tested browsers render the first encountered <code>thead</code> at the top of the table, the first <code>tfoot</code> encountered at the end of the table, and all other <code>thead</code>, <code>tbody</code>, <code>tfoot</code>, and direct <code>tr</code> children in the order they are encountered in the source.</p>
-<p>In all tested browsers the <code>caption</code>, <code>tHead</code>, and <code>tFoot</code> DOM attributes match the first element of each type encountered in the source.</p>
-<h4>Yandex.browser 16.4 and Safari 9.1</h4>
-<p>Both <code>caption</code> elements are rendered, at the top of the table</p>
-<h4>Firefox 46</h4>
-<p>Only the first <code>caption</code> element encountered is rendered, at the top of the table</p>
+ <dl>
+  <dt>All tested browsers</dt>
+    <dd>render the first encountered <code>thead</code> at the top of the table and return its <code>tr</code> child as <code>table.rows[0]</code></dd>
+    <dd>render the first <code>tfoot</code> encountered at the end of the table</dd> 
+    <dd>render all other <code>thead</code>, <code>tbody</code>, <code>tfoot</code>, and direct <code>tr</code> children in the order they are encountered in the source.</dd>
+    <dd>The <code>caption</code>, <code>tHead</code>, and <code>tFoot</code> DOM attributes of the table match the first element of each type encountered in the source.</dd>
+
+  <dt>Yandex.browser 16.4 and Safari 9.1, on Mac OS X 10.10</dt>
+    <dd>Both <code>caption</code> elements are rendered, at the top of the table</dd>
+    <dd>Adds all <code>tr</code> children of <code>thead</code> elements to <code>table.rows</code> in the order they are encountered in the source, followed by all <code>tr</code> children of <code>tbody</code> elements or the <code>table</code> element itself, followed by all <code>tr</code> children of <code>tfoot</code> elements.</dd>
+
+  <dt>Microsoft Edge 25, Microsoft IE 11, on Windows 10</dt>
+    <dd>Both <code>caption</code> elements are rendered, at the top of the table</dd>
+
+  <dt>Firefox 46</dt>
+    <dd>Only the first <code>caption</code> element encountered is rendered, at the top of the table</dd>
+    <dd>Puts the <code>tr</code> children of <strong>only the first <code>thead</code> child</strong> at the start of <code>table.rows</code>, and the <code>tr</code> children of <strong>only the first <code>tfoot</code> child</strong> at the end of it</dd>
+    <dd>Adds all <code>tbody</code> and direct <code>tr</code> children, and all <code>tfoot</code> and <code>thead</code> children other than the first of each enountered, to <code>table.rows</code> after the <code>tr</code> children of the first <code>thead</code> in the order they are encountered in the source.</dd>
+
+
+ </dl>
 
 </body>
 </html>
