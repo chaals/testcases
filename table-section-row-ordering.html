@@ -3,6 +3,11 @@
  <head>
   <meta charset="utf-8">
   <title>Table row construction test</title>
+  <style>
+    thead {background-color: #faa}
+    tfoot {background-color: #afa}
+    tbody {background-color: #aaf}
+  </style>
  </head>
  <body>
  <h1>Table row construction</h1>
@@ -14,6 +19,8 @@
 <p>The following table is constructed, based on <code>caption</code>, <code>thead</code>, <code>tbody</code>, <code>tfoot</code>, and <code>tr</code> children which appear in the source in the row described.</p> 
 
 <p>Each <code>thead</code>, <code>tbody</code>, and <code>tfoot</code> contains a single <code>tr</code> element</p>
+
+<p><code>thead</code>, <code>tbody</code>, and <code>tfoot</code> are coloured by CSS, just to show what matches each selector - which seems to work according to spec.</p>
 
 <table>
   <tfoot><tr><th>F1</th><td>First footer, first row of source</td></tr></tfoot>
@@ -47,7 +54,7 @@
 </table>
 
 <h2>More information about the table generated</h2>
-<p>This but is broken in IE / Edge. Pull requests accepted</p>
+<p>This bit is broken in IE / Edge. Pull requests accepted</p>
 <form>
 <p>The caption: <output id="theCaption"></output></p>
 <p>The Header: <output id="theHeader"></output></p>
