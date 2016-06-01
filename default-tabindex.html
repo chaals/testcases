@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <title>Default tabindex value - test</title>
   <script>
-   function toggle(theName) {
+   function toggle(theName) {   //handler for the span with onclick and accesskey
      theBox=document.querySelector(('#'+theName));
      if (theBox.checked)
        theBox.removeAttribute('checked');
@@ -18,6 +18,8 @@
 
  <p>The following test determines the default tabindex value for some elements that are active by default, and some elements that are inactive by default</p>
 
+
+
 <form>
 <p id="zero">0, a paragraph, 1, a text input, <input id="one" type="text"> <label for="one" id="two">2, a label</label></p>
 <p>3, a checkbox <input type='checkbox' id="three"> <span id="four" accesskey="1"  onclick="toggle('three')">4, a <code>span</code> with an <code>onclick</code> function and an <code>accesskey</code> </span></p>
@@ -25,12 +27,13 @@
 <p> <a href="http://w3.org" id="seven">7, a link</a></p>
 <p> <a href="http://w3.org" id="eight" tabindex="0">8, a link with <code>tabindex="0"</p>
 <p> <a href="http://w3.org" id="nine" tabindex="-1">9, a link with <code>tabindex="-1"</code></a></p>
+<p> 10, <a name="ten" id="ten">A named anchor</a> - <code>&lt;a name="ten" id="ten"&gt;</code> with no <code>href</code> attribute.</p>
 <h3>The tabindex values</h3>
 <p><output id="output"></output></p>
 </form>
 
 <script>
-  myList = ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine"];
+  myList = ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"];
   for (i=0;i<myList.length;i++) {
     document.forms[0].output.innerHTML += myList[i] + ": " + (document.querySelector('#'+myList[i]).tabIndex) + ", ";
   } 
@@ -50,6 +53,7 @@
  <li><samp>0<samp></li>
  <li><samp>0<samp></li>
  <li><samp>-1<samp></li>
+ <li><samp>0<samp></li>
 </ol>
 
 </body>
