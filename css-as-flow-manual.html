@@ -10,7 +10,15 @@
 
  <p>This tests whether an HTML document providing CSS in a style element as flow content can be used as a style sheet.</p>
 
- <p>If the text is green, and each paragraph is surrounded by a dotted green border, the browser does us the flow content as a style sheet</p>
+ <p>If the text is green, and each paragraph is surrounded by a dotted green border, the browser does use the linked HTML flow content as a style sheet - but in practice Firefox, Safari, and Yandex browser ignore the first rule in the linked stylesheet - I have to check if that's a bug or some counterintuitive specified behaviour.</p>
+
+<style>
+/* If this inline stylesheet is rendered, and applied, then style as flow content works too */
+
+  style {color: blue}
+  h1 { border: 3px dashed gold }
+  style {display: block; font-family: monospace; white-space: pre;}
+</style>
 
 </body>
 </html>
