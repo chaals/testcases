@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="utf-8">
+  <title>SVG title as first child test</title>
+ </head>
+ <body>
+ <h1>SVG <code>title</code> as first child</h1>
+
+ <p>This tests whether the SVG <code>title</code> element that is the first child, or last child, is the one that is used in practice.</p>
+
+ <p>To run the test you need to get the title of the following SVG, e.g. by hovering and waiting for a tooltip to appear - if it is about "test of title…" then the test passes, if it is "The implementation doesn't match" then the test shows the implementation doesn't match the HTML 5.1 specification</p>
+
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="200" height="200" viewBox="0 0 200 200">
+  <title>Test of title element as first child</title>
+  <rect fill="#eee" x="20" y="20"
+        stroke="black" stroke-width="8px" stroke-linejoin="round"
+        width="150" height="100"/>
+  <title>The implementation doesn't match</title>
+</svg>
+
+</body>
+</html>
