@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="utf-8">
+  <title>X-origin window.frameElement test file</title>
+ </head>
+ <body>
+ <h1>@@test</h1>
+
+ <p>This test has unknown results</p>
+
+<script>
+  var theP = document.querySelector('p');
+  try {
+    theP.innerHTML = "this test result is " + (!window.frameElement);
+  } catch(err) {
+    theP.innerHTML = "the thing threw error " + err + "! FAIL";
+  }
+    
+</script> 
+
+
+</body>
+</html>
