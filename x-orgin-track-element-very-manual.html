@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="utf-8">
+  <title>X-origin track test</title>
+ </head>
+ <body>
+ <h1>X-origin <code>track</code> test</h1>
+
+ <p>To test whether a cross-origin track can be loaded, modify the code from http://www.w3schools.com/html/tryit.asp?filename=tryhtml5_video_autoplay to the following:</p>
+<pre><code>
+&lt;video width="320" height="240" controls crossorigin>
+  &lt;source src="movie.mp4" type="video/mp4">
+  &lt;source src="movie.ogg" type="video/ogg">
+  &lt;track kind="captions" src="https://chaals.github.io/testcases/webvtt-file.vtt">
+  Your browser does not support the video tag.
+&lt;/video>
+</code></pre>
+
+</body>
+</html>
