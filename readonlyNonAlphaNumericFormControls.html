@@ -6,6 +6,11 @@
  <body>
 <h1>readonly attribute on form controls <code>color<code>, <code>range</code>, <code>checkbox</code>, <code>radio</code></h1>
   <form method="get" action="readonlyNonAlphaNumericFormControls.html?">
+<p>   <input type="date" name="date" readonly="true" value="2017-01-17">
+<p>   <input type="datetime" name="datetime" readonly="true"
+        value="1979-10-14T12:00:00.001-04:00">
+<p>   <input type="datetime-local" name="datetimelocal" readonly="true"
+        value="1974-07-16T12:00:00">
 <p>   <input type="color" name="color" readonly="true" value="#ff0000">
 <p>   <input type="range" name="range" readonly="true" value="4">
 <p>   <input type="range" name="multirange" multiple="true" readonly="true" value="4,90">
