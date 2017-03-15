@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="utf-8">
+  <title>left-to-right table test</title>
+  <style>
+   table  { width:50% ; margin-left: 20% ; margin-right: 20% }
+   th, td { border: 1px solid black }
+  </style>
+ </head>
+ <body>
+ <h1 lang="en">RTL table test</h1>
+
+ <p lang="en">This tests what makes tables build in an RTL layout</p>
+
+<table dir="rtl">
+ <caption dir="ltr"><pre><code>&lt;table dir="rtl"&gt;
+&lt;caption dir="ltr"&gt;
+&lt;thead&gt;
+&lt;tbody&gt;</code></pre></caption>
+ <thead>
+    <tr> <th>h1 </th><td>h2 </td><td>h3 </td></tr>
+ </thead>
+ <tbody>
+    <tr> <th> 1 </th><td> 2 </td><td> 3 </td></tr>
+    <tr> <th> 1 </th><td> 2 </td><td> 3 </td></tr>
+    <tr> <th> 1 </th><td> 2 </td><td> 3 </td></tr>
+ </tbody>
+</table>
+
+<div dir="rtl">
+<table>
+ <caption dir="ltr"><pre><code>&lt;div dir="rtl"&gt;
+&lt;table&gt;
+&lt;caption dir="ltr"&gt;
+&lt;thead&gt;
+&lt;tbody&gt;</code></pre></caption>
+ <thead>
+    <tr> <th>h1 </th><td>h2 </td><td>h3 </td></tr>
+ </thead>
+ <tbody>
+    <tr> <th> 1 </th><td> 2 </td><td> 3 </td></tr>
+    <tr> <th> 1 </th><td> 2 </td><td> 3 </td></tr>
+    <tr> <th> 1 </th><td> 2 </td><td> 3 </td></tr>
+ </tbody>
+</table>
+</div>
+
+<table>
+ <caption dir="ltr"><pre><code>&lt;table&gt;
+&lt;caption dir="ltr"&gt;
+&lt;thead&gt;
+&lt;tbody dir="rtl"&gt;</code></pre></caption>
+ <thead>
+    <tr> <th>h1 </th><td>h2 </td><td>h3 </td></tr>
+ </thead>
+ <tbody dir="rtl">
+    <tr> <th> 1 </th><td> 2 </td><td> 3 </td></tr>
+    <tr> <th> 1 </th><td> 2 </td><td> 3 </td></tr>
+    <tr> <th> 1 </th><td> 2 </td><td> 3 </td></tr>
+ </tbody>
+</table>
+
+<table dir="rtl">
+ <caption dir="ltr"><pre><code>&lt;table dir="rtl"&gt;
+&lt;caption dir="ltr"&gt;
+&lt;thead dir="ltr"&gt;
+&lt;tbody&gt;</code></pre></caption>
+ <thead dir="ltr">
+    <tr> <th>h1 </th><td>h2 </td><td>h3 </td></tr>
+ </thead>
+ <tbody>
+    <tr> <th> 1 </th><td> 2 </td><td> 3 </td></tr>
+    <tr> <th> 1 </th><td> 2 </td><td> 3 </td></tr>
+    <tr> <th> 1 </th><td> 2 </td><td> 3 </td></tr>
+ </tbody>
+</table>
+
+<table dir="rtl">
+ <caption dir="ltr"><pre><code>&lt;table dir="rtl"&gt;
+&lt;caption dir="ltr"&gt;
+&lt;thead dir="ltr"&gt;
+&lt;tbody dir="ltr"&gt;</code></pre></caption>
+ <thead dir="ltr">
+    <tr> <th>h1 </th><td>h2 </td><td>h3 </td></tr>
+ </thead>
+ <tbody dir="ltr">
+    <tr> <th> 1 </th><td> 2 </td><td> 3 </td></tr>
+    <tr> <th> 1 </th><td> 2 </td><td> 3 </td></tr>
+    <tr> <th> 1 </th><td> 2 </td><td> 3 </td></tr>
+ </tbody>
+</table>
+
+
+
+</body>
+</html>
