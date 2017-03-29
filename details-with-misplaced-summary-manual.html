@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="utf-8">
+  <title>details with two summary elements test</title>
+ </head>
+ <body>
+ <h1><code>details</code> with misplaced <code>summary</code> manual test</h1>
+
+ <p>This tests what happens when you have a <code>details</code> element with a descendant <code>summary</code> element that is not its first child.</p>
+
+<details>
+<pre><code>&lt;details>&lt;summary><summary>first summary</summary>&lt;/summary>
+&lt;pre>&lt;code>&lt;p>This is a paragraph inside a &lt;code>details&lt;/code> element
+  that has a misplaced &lt;code>summary&lt;/code> element.&lt;/p>&lt;/details></code></pre>
+
+
+<p>This is a paragraph inside a <code>details</code> element that has a misplaced <code>summary</code> element.</p>
+</details>
+
+
+</body>
+</html>
