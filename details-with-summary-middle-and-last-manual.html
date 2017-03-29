@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="utf-8">
+  <title>details with summary element last test</title>
+ </head>
+ <body>
+ <h1><code>details</code> with final <code>summary</code> manual test</h1>
+
+ <p>This tests what happens when you have a <code>details</code> element with two descendant <code>summary</code> elements, one a middle and one that is its last child.</p>
+
+<details>
+<pre><code>&lt;details>
+&lt;pre>&lt;code>&lt;p>This is a paragraph inside a &lt;code>details&lt;/code> element
+  that has 2 &lt;code>summary&lt;/code> element children, one with previous and next siblings
+  and the other as its last child.&lt;/p>&lt;summary>summary&lt;/summary>&lt;/details></code></pre>
+
+<summary>first summary</summary>
+<p>This is a paragraph inside a <code>details</code> element that has two <code>summary</code> element children, one with previous and next siblings and the other as its last child.</p>
+<summary>second summary</summary>
+</details>
+
+
+</body>
+</html>
