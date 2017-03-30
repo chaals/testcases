@@ -7,13 +7,22 @@
  <body>
  <h1>contextmenu test</h1>
 
- <p>This tests contextmenus</p>
+ <p>This tests context menu support. The context menu on the input field should have seven non-browser-supplied items: 3 with duck items in alternating colours, a seperator, and then 3 more items with duck icons.</p>
+
+<p>The first 4 items show what is selected to present to the user as a label - the fourth having no label content supplied. the last 3 test support for <code>hr</code> and using <code>menuitem</code> as an empty element.</p>
 
 <form name="npc">
   <label>Character name: <input name=char type=text contextmenu=namemenu required></label>
   <menu type=context id=namemenu>
-  <menuitem icon="aduck.jpg" label="Pick random name" onclick="document.forms.npc.elements.char.value = getRandomName()"></menuitem>
-  <menuitem icon="bduck.jpg" onclick="prefillFields(document.forms.npc.elements.char.value)">prefill fields</menuitem>
+  <menuitem icon="aduck.jpg" label="using only label works" onclick="alert('item 1')"></menuitem>
+  <menuitem icon="bduck.jpg" label="label preferred over text content" onclick="alert('item 2')">text content preferred over label</menuitem>
+  <menuitem icon="aduck.jpg" onclick="alert('item 3')">using only text content works</menuitem>
+  <menuitem icon="bduck.jpg" onclick="alert('item 4')"></menuitem>
+  <hr>
+  <menuitem icon="aduck.jpg" onclick="alert('item 5')">hr works if there is one before this option</menuitem>
+  <menuitem icon="bduck.jpg" label="label with no end tag works *if* there as another option after this" onclick="alert('item 6')">
+  <menuitem icon="aduck.jpg" onclick="alert('item 7')">This is to test the preceding menuitem</menuitem>
+
   </menu>
 </form>
 
