@@ -4,14 +4,15 @@
   <meta charset="utf-8">
   <title>left-to-right table test</title>
   <style>
-   table  { width:50% ; margin-left: 20% ; margin-right: 20% }
-   th, td { border: 1px solid black }
+   table   { width:50% ; margin-left: 20% ; margin-right: 20% }
+   th, td  { border: 1px solid black }
+   caption { text-align: left }
   </style>
  </head>
  <body>
  <h1 lang="en">RTL table test</h1>
 
- <p lang="en">This tests what makes tables build in an RTL layout</p>
+ <p lang="en">Some things that might make tables build in an RTL layout</p>
 
 <table dir="rtl">
  <caption dir="ltr"><pre><code>&lt;table dir="rtl"&gt;
@@ -103,11 +104,39 @@
     <tr> <th>h1 </th><td>h2 </td><td>h3 </td></tr>
  </thead>
  <tbody>
-    <tr dir="rtl"> <th> 1 </th><td> 2 </td><td> 3 </td></tr>
-    <tr> <th> 1 </th><td> 2 </td><td> 3 </td></tr>
-    <tr> <th> 1 </th><td> 2 </td><td> 3 </td></tr>
+    <tr dir="rtl"> <th> r1h1 </th><td> r1c2 </td><td> r1c3 </td></tr>
+    <tr> <th> r2h1 </th><td> r2c2 </td><td> r3c3 </td></tr>
+    <tr> <th> r3h1 </th><td> r3c2 </td><td> r3c3 </td></tr>
  </tbody>
 </table>
+
+<table lang="ar">
+ <caption dir="ltr"><pre><code>&lt;table lang="ar"&gt;
+  &lt;thead&gt;
+  &lt;tbody&gt;
+   &lt;tr&gt;
+    &lt;td&gt; &lt;td&gt; &lt;th&gt;</code></pre></caption>
+ <tbody>
+    <tr dir="rtl"> <td> r1h1 </td><td> r1c2 </td><th> r1c3 </th></tr>
+    <tr> <td> r2h1 </td><td> r2c2 </td><th> r3c3 </th></tr>
+    <tr> <td> r3h1 </td><td> r3c2 </td><th> r3c3 </th></tr>
+ </tbody>
+</table>
+
+<div dir="rtl">
+<table lang="ar">
+ <caption dir="ltr"><pre><code>&lt;table lang="ar"&gt;
+  &lt;thead&gt;
+  &lt;tbody&gt;
+   &lt;tr&gt;
+    &lt;td&gt; &lt;td&gt; &lt;th&gt;</code></pre></caption>
+ <tbody>
+    <tr dir="rtl"> <td> r1h1 </td><td> r1c2 </td><th> r1c3 </th></tr>
+    <tr> <td> r2h1 </td><td> r2c2 </td><th> r3c3 </th></tr>
+    <tr> <td> r3h1 </td><td> r3c2 </td><th> r3c3 </th></tr>
+ </tbody>
+</table>
+</div>
 
 
 </body>

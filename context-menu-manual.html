@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="utf-8">
+  <title>contextmenu test</title>
+ </head>
+ <body>
+ <h1>contextmenu test</h1>
+
+ <p>This tests contextmenus</p>
+
+<form name="npc">
+  <label>Character name: <input name=char type=text contextmenu=namemenu required></label>
+  <menu type=context id=namemenu>
+  <menuitem icon="aduck.jpg" label="Pick random name" onclick="document.forms.npc.elements.char.value = getRandomName()"></menuitem>
+  <menuitem icon="bduck.jpg" onclick="prefillFields(document.forms.npc.elements.char.value)">prefill fields</menuitem>
+  </menu>
+</form>
+
+</body>
+</html>
