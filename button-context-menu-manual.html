@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="utf-8">
+  <title>Button context menu test</title>
+ </head>
+ <body>
+ <h1>Button context menu test</h1>
+
+ <p>This tests using a context menu on a button</p>
+
+<button contextmenu="editmenu">Commands...</button>
+<menu type="context" id="editmenu">
+  <menuitem label="Left" icon="icons/alL.png" onclick="setAlign('left')">
+  </menuitem>
+  <menuitem label="Center" icon="icons/alC.png" onclick="setAlign('center')">
+  </menuitem>
+  <menuitem label="Right" icon="icons/alR.png" onclick="setAlign('right')">
+  </menuitem>
+  <hr>
+  <menuitem disabled label="Publish" icon="icons/pub.png" onclick="publish()">
+  </menuitem>
+</menu>
+
+</body>
+</html>

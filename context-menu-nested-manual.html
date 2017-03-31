@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="utf-8">
+  <title>nested context menus test</title>
+ </head>
+ <body>
+ <h1>nested context menus test</h1>
+
+ <p>This tests whether nested context menus work,</p>
+
+<img src="aduck.jpg" alt="Cats" contextmenu=catsmenu>
+<menu type="context" id="catsmenu">
+  <menuitem label="Pet the kittens" onclick="kittens.pet()">
+  </menuitem>
+  <menuitem label="Cuddle with the kittens" onclick="kittens.cuddle()">
+  </menuitem>
+  <menu>
+    <menuitem label="oh?" onclick="alert('my parent menu has no label')" disabled>
+    </menuitem>
+    <menuitem label="well" onclick="alert('that is not very clever')">
+    </menuitem>
+  </menu>
+  <menu label="Feed the kittens">
+    <menuitem label="Fish" onclick="alert('kittens.feed - fish')" disabled>
+    </menuitem>
+    <menuitem label="Chicken" onclick="alert('kittens.feed-chicken')">
+    </menuitem>
+  </menu>
+</menu>
+
+</body>
+</html>
