@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="utf-8">
+  <title>test combining unicode points as accesskeys</title>
+ </head>
+ <body>
+ <h1>combining unicode points as accesskey test</h1>
+
+ <p>This tests using something like <code>accesskey="&amp;#110;&amp;#771;"</code> as a way to specify the "ñ" key, when available, as an <code>accesskey</code></p>.
+
+<p>The test is easily run using a "standard" spanish keyboard, which has all the relevant keys available as a bare key. If you cannot activate or focus any links, then (probably) the <code>accesskey</code> attribute is ineffective and the results are not helpful. If you can activate the first and third but not second, then (probably) non-ascii keys work fine, but only if they are expressed as a single code point. If you can activate all three links, then the HTML 5.2 spec as of 5.2 doesn't match reality and we should make a change, as per <a href="http://github.com/w3c/html/issues/485">issue 485</a>.</p>
+
+<p>The following link uses <code>accesskey="ç"</code>. Can you use <a href="test.html" accesskey="ç">accesskey ç</a> to focus or activate it?</p>
+
+<p>Results: </p>
+<ul>
+ <li>Blink, Webkit, Gecko / MacOS 10.10 / spanish keyboard: Yes</li>
+</ul>
+
+<p>The following link uses <code>accesskey="&amp;#110;&amp;#771;"</code>. Can you use <a href="test.html" accesskey=""&#110;&#771;"">accesskey ñ</a> to focus or activate it?</p>
+
+<p>Results: </p>
+<ul>
+ <li>Blink, Webkit, Gecko / MacOS 10.10 / spanish keyboard: No</li>
+</ul>
+
+<p>The following link uses <code>accesskey="n"</code>. Can you use <a href="test.html" accesskey="n">accesskey n</a> to focus or activate it?</p>
+
+<p>Results: </p>
+<ul>
+ <li>Blink, Webkit, Gecko / MacOS 10.10 / spanish keyboard: Yes</li>
+</ul>
+
+
+</body>
+</html>
