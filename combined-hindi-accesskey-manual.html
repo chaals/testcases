@@ -11,7 +11,7 @@
 
 <p>The test is apparently run using an "INSCRIPT" Hindi keyboard, which has the relevant keys available as shift. If you cannot activate or focus any links, then (probably) the <code>accesskey</code> attribute is ineffective and the results are not helpful. If you can activate the first, then </code>accesskey</code> works with a single printable character that is multiple unicode code point, the HTML 5.2 spec as of 5.2 doesn't match reality and we should make a change, as per <a href="http://github.com/w3c/html/issues/485">issue 485</a>. The third test is for curiosity, since I don't understand Hindi enough yet to know what to expect here.</p>
 
-<p>The following link uses <code>accesskey="श्र"</code>. Can you use <a href="test.html" accesskey="श्र">accesskey श्र</a> to focus or activate it?</p>
+<p>The following link uses <code>accesskey="श्र"</code>. Can you use <a href="pass.html" accesskey="श्र">accesskey श्र</a> to focus or activate it?</p>
 
 <p>Results: </p>
 <dl>
@@ -22,7 +22,7 @@
   <dd>Firefox: does not activate</dd>
 </dl>
 
-<p>The following link uses <code>accesskey="क"</code>. Can you use <a href="test.html" accesskey="क">accesskey क</a> to focus or activate it?</p>
+<p>The following link uses <code>accesskey="क"</code>. Can you use <a href="pass.html" accesskey="क">accesskey क</a> to focus or activate it?</p>
 
 <p>Results: </p>
 <dl>
@@ -33,7 +33,7 @@
   <dd>Firefox: activates</dd>
 </dl>
 
-<p>The following link uses <code>accesskey="्"</code>. Can you use <a href="test.html" accesskey="्">accesskey ्  (Just the Virama)</a> to focus or activate it?</p>
+<p>The following link uses <code>accesskey="्"</code>. Can you use <a href="pass.html" accesskey="्">accesskey ्  (Just the Virama)</a> to focus or activate it?</p>
 
 <p>Results: </p>
 <dl>
