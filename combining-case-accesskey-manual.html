@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="utf-8">
+  <title>test combining unicode points as accesskeys</title>
+ </head>
+ <body>
+ <h1>Case-sensitivity in accesskey test</h1>
+
+ <p>This tests how <code>accesskey</code> handles case, and repeated instances of the same value, in order to deal with issues raised in <a href="http://github.com/w3c/html/issues/485">issue 485</a>.</p>
+
+<p>The test is run with keyboard that has "a" and "b" keys. If you cannot activate or focus any links, then (probably) the <code>accesskey</code> attribute is ineffective and the results are not helpful.</p>
+
+
+<h2 id="one">1. "A"</h2>
+
+<p>The following link uses <code>accesskey="&amp;#x0041;"</code>. Can you use <a href="one.html" accesskey="&#x0041;">accesskey A</a> to focus or activate it?</p>
+
+<p>Results: </p>
+<ul>
+ <li class="fail">Blink, Webkit, Gecko / MacOS 10.10 / australian keyboard: No</li>
+ <li class="pass">Gecko / MacOS 10.10 / australian keyboard: ctrl-alt-a focuses link</li>
+ <!--li>Edge / Windows 10 / spanish keyboard: Yes</li-->
+</ul>
+
+<h2 id="two">2. "a"</h2>
+
+<p>The following link to "page one" uses <code>accesskey="&amp;#x0061;"</code>. Can you use <a href="two.html" accesskey="&#x0061;">accesskey &#x0061;</a> to focus or activate it?</p>
+
+<p>Results: </p>
+<ul>
+ <li class="fail">Blink, Webkit, Gecko / MacOS 10.10 / australian keyboard: No</li>
+ <li class="pass">Gecko / MacOS 10.10 / australian keyboard: ctrl-alt-a twice focuses link</li>
+ <!--li>Edge / Windows 10 / spanish keyboard: Yes</li-->
+</ul>
+
+<h2 id="three">3. "a"</h2>
+
+<p>The following link uses <code>accesskey="&amp;#x0061;"</code>. Can you use <a href="three.html" accesskey="&#x0061;">accesskey &#x0061;</a> to focus or activate it?</p>
+
+<p>Results: </p>
+<ul>
+ <li class="fail">Blink, Webkit / MacOS 10.10 / australian keyboard: No</li>
+ <li class="pass">Gecko / MacOS 10.10 / australian keyboard: ctrl-alt-a thrice focuses link</li>
+ <!--li>Edge / Windows 10 / spanish keyboard: Yes</li-->
+</ul>
+
+<h2 id="four">4. "A"</h2>
+
+<p>The following link uses <code>accesskey="&amp;#x0041;"</code>. Can you use <a href="four.html" accesskey="&#x0041;">accesskey &#x0041;</a> to focus or activate it?</p>
+
+<p>Results: </p>
+<ul>
+ <li class="fail">Blink, Webkit / MacOS 10.10 / australian keyboard: ctrl-alt-a or ctrl-alt-shift-a activate the link</li>
+ <li class="pass">Gecko / MacOS 10.10 / australian keyboard: ctrl-alt-a 4 times focuses the link</li>
+ <!--li>Edge / Windows 10 / spanish keyboard: Yes</li-->
+</ul>
+
+<h2 id="five">5. "b"</h2>
+
+<p>The following link uses <code>accesskey="&amp;#x0062;"</code>. Can you use <a href="five.html" accesskey="&#x0062;">accesskey &#x0062;</a> to focus or activate it?</p>
+
+<p>Results: </p>
+<ul>
+ <li class="pass">Blink, Webkit, Gecko / MacOS 10.10 / australian keyboard: Yes</li>
+ <!--li>Edge / Windows 10 / spanish keyboard: Yes</li-->
+</ul>
+
+
+</body>
+</html>
