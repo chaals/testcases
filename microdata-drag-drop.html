@@ -1,0 +1,123 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+ <title>microdata drag and drop test</title>
+<style>
+ h1, h2 { color: #000; font-family: Helvetica, sans-serif;}
+ h2 { margin-bottom: 0.25em;}
+body {font-family: sans-serif;}
+li {list-style-type:none;}
+ul {padding-left:0;margin-top: 0;}
+dl { margin-top: 0em;}
+dt,dd { padding: 0.5em;}
+dt { font-weight: bold; background: #6A93D4;}
+dd { color: #1B1BB3; white-space: pre-wrap; }
+li, h2 + p, a[itemprop] {  background: linear-gradient(#6A93D4, #1B1BB3);
+  margin-top: 0.5em;  padding: 0.5em; color: white;  text-shadow: 1px 1px 0px black;  border-radius: 3px;}
+#dl-head {  visibility: hidden;}
+</style>
+
+</head>
+
+<body>
+<div id="wrapper"><noscript><p>Enable JavaScript and reload</p></noscript>
+
+<p>This demo was tweaked by chaals from <a href="https://dev.opera.com/articles/drag-and-drop/demo.html">Mike Taylor's original</a> under the terms of the <a href="https://creativecommons.org/licenses/by/3.0/">CC-By-3.0 license</a>.
+
+<h2>Drag sources</h2>
+<ul>
+<li draggable="true">A plain draggable element.</li>
+
+<li><a href="http://www.example.com/">Draggable link</a>.</li>
+
+<li draggable="true" itemscope=""><span itemprop="foo">Draggable</span> element
+  with microdata.<a itemprop="foo" href="http://www.example.com/"></a><a itemprop="bar"
+   href="http://www.example.org/"></a></li>
+
+<li draggable="true"><span itemscope=""><span itemprop="foo">Draggable</span> element
+  with microdata added by script.<a itemprop="foo" href="http://www.example.com/"></a><a itemprop="bar"
+   href="http://www.example.org/"></a></span></li>
+
+<li draggable="true" itemscope itemtype="http://example.org/test">
+  <a itemprop="url" href="http://www.example.com/">Draggable link with microdata</a>.</li>
+
+<li>Select this entire paragraph to
+  <span itemscope=""><span itemprop="baz">create</span><a itemprop="qux" href="http://www.example.com/"></a></span>
+  a <span itemscope=""><span itemprop="foo">draggable</span><a itemprop="foo" href="http://www.example.com/">
+  </a><a itemprop="bar" href="http://www.example.org/"></a></span> selection intersecting some microdata.</li>
+<li>Now, drag some files from your computer to this page.</li>
+</ul>
+
+<h2>Drop target</h2>
+<p>Drop onto this text. The dropped data should appear below.</p>
+
+ <h2 id="dl-head">Drop data</h2>
+<dl></dl>
+</div>
+
+<script>var dE = document.getElementsByTagName('li'),
+        droptarget = document.getElementsByTagName('p')[1],
+        output = document.getElementsByTagName('dl')[0];
+        
+    dE[0].addEventListener('dragstart', function (e) {
+      e.dataTransfer.setData('text/plain','Dragging and dropping works');
+      e.dataTransfer.setData('text/x-plain','So do custom types');
+      e.dataTransfer.effectAllowed = 'all';
+    }, false);
+    
+    dE[2].addEventListener('dragstart',function (e) {
+      e.dataTransfer.setData('text/plain','Did you find the microdata here?');
+      e.dataTransfer.effectAllowed = 'all';
+    }, false);
+    
+    dE[3].addEventListener('dragstart',function (e) {
+      e.dataTransfer.setData('application/microdata+json','{something:broke,pretty:sadly}');
+      e.dataTransfer.effectAllowed = 'all';
+    }, false);
+    
+    ['dragenter', 'dragover'].forEach(function(item){
+      droptarget.addEventListener(item, function(e){
+        e.preventDefault();
+      }, false);
+    });
+    
+    droptarget.addEventListener('drop', function (e) {
+      e.preventDefault();
+      while( output.hasChildNodes() ) {
+        output.removeChild(output.firstChild);
+      }
+      defItem('dropEffect',e.dataTransfer.dropEffect);
+      try {
+        for( var i = 0; i < e.dataTransfer.types.length; i++ ) {
+          defItem('datatype '+e.dataTransfer.types[i],e.dataTransfer.getData(e.dataTransfer.types[i]));
+        }
+      } catch(f) {
+        defItem('dataTransfer.types','Threw an error when checking for data, so trying the two that IE 9 supports');
+        try {
+          defItem('text',e.dataTransfer.getData('text'));
+          defItem('url',e.dataTransfer.getData('url'));
+        } catch(g) {
+          defItem('Ouch','That threw an error too');
+        }
+      }
+      try {
+        for( var i = 0; i < e.dataTransfer.files.length; i++ ) {
+          defItem('file '+i,e.dataTransfer.files[i].name);
+        }
+      } catch(g) {
+        defItem('files','Threw an error when checking');
+      }
+    }, false);
+    
+  function defItem(dtText,ddText) {
+    var h2 = document.getElementById('dl-head');
+    h2.style.visibility = 'visible';
+    var dt = document.createElement('dt'), 
+        dd = document.createElement('dd');
+        
+    dt.appendChild(document.createTextNode(dtText));
+    dd.appendChild(document.createTextNode(ddText));
+    output.appendChild(dt);
+    output.appendChild(dd);
+  }</script></body></html>
