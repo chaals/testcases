@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Heading and text in legend</title>
+  <style>
+  legend {border: 2px red solid}
+  </style>
+</head>
+<body>
+
+<h1>Heading and text in legend</h1>
+<p>A half-baked test to play with the contents of a <code>legend</code> element.</p>
+<p>Thanks to <a href=https://github.com/selfthinker">Anika Henke</a> for
+ <a href="https://github.com/w3c/html/issues/1081"> the motivating question</a>.</p>
+<form>
+<fieldset>
+  <legend>
+    <h1>Heading in legend</h1>
+    with other phrasing content
+  </legend>
+  <p><input type="checkbox">Does the heading come first, and a border enclose the two? Is there any error marked in the console?</p>
+</fieldset>
+
+<fieldset>
+  <legend>
+     other phrasing content then
+    <h1>Heading in legend</h1>
+  </legend>
+  <p><input type="checkbox">Does the heading come second, and a border enclose the two? Is there any error marked in the console?</p>
+</fieldset>
+</form>
+</body>
+</html>
