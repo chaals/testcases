@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8">
+  <title>autocapitalize test</title>
+ </head>
+ <body>
+ <h1><code>autocapitalize</code> test</h1>
+
+ <p>This tests the <code>autocapitalize</code> attribute for the <code>input</code> element.</p>
+ 
+ <p>To run the test type, and paste, each of the following texts into each of the input elements below:</p>
+ 
+ <ul>
+ <li>a test. two sentences.</li>
+ <li lang="ru">по-русский. это работает?</li>
+ <li lang="de">hier ist ein beispiel. die deutsche sprache hat regeln.</li>
+ </ul>
+
+<form>
+<p><label for="input0">The attribute is absent:
+ <input id="input0"></label>. There should be no autocapitalization, so the text should be as entered.</p>
+ 
+<p><label for="input1">The attribute is present with no value:
+ <input autocapitalize id="input1"></label>. There should be no autocapitalization, so the text should be as entered.</p>
+ 
+<p><label for="input2">The attribute is present the value <samp>characters</samp>:
+ <input autocapitalize="characters" id="input2"></label>. To pass the phrases should be capitalised as follows:</p>
+ 
+  <ul>
+   <li>A TEST. TWO SENTENCES.</li>
+   <li lang="ru">ПО-РУССКИЙ. ЭТО РАБОТАЕТ?</li>
+   <li lang="de">HIER IS EIN BEISPIEL. DIE DEUTSCHE SPRACHE HAT REGELN</li>
+  </ul>
+
+ 
+<p><label for="input3">The attribute is present the value <samp>words</samp>:
+ <input autocapitalize="words" id="input3"></label>. To pass the phrases should be capitalised as follows:</p>
+ 
+  <ul>
+   <li>A Test. Two Sentences.</li>
+   <li lang="ru">По-Русский. Это Работает?</li>
+   <li lang="de">Hier Ist Ein Beispiel. Die Deutsche Sprache Hat Regeln.</li>
+  </ul>
+
+<p><label for="input4">The attribute is present with the value <samp>sentences</samp>:
+ <input autocapitalize="sentences" id="input4"></label>. To pass the phrases should be capitalised as follows:</p>
+
+  <ul>
+   <li>A test. Two sentences.</li>
+   <li lang="ru">По-русский. Это работает?</li>
+   <li lang="de">Hier ist ein Beispiel. Die Deutsche Sprache hat Regeln.</li>
+  </ul>
+
+<p><label for="input5">The attribute is present with the value <samp>specialValue</samp>:
+ <input autocapitalize="specialValue" id="input5"></label>. To pass the phrases should have no capitalisation applied:</p>
+
+
+</form>
+<!-- a test goes here -->
+
+
+</body>
+</html>
