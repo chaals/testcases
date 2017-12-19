@@ -4,7 +4,10 @@
   <meta charset="utf-8">
   <title>xml:base in html test</title>
  </head>
- <body xml:base="https://example.com/">
+ <body>
+ <script>
+ document.body.setAttributeNS("http://www.w3.org/XML/1998/namespace","base","https://example.net/");
+ </script>
  <h1><code>xml:base</code> in HTML documents</h1>
 
  <p>This tests what xml:base does in HTML documents…</p>
