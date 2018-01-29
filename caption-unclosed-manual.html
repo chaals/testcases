@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="utf-8">
+  <title>unclosed caption test</title>
+ </head>
+ <body>
+ <h1>Unclosed caption test</h1>
+
+ <p>This tests what happens when <code>caption</code> elements have no end tag. 
+ None of the <code>caption</code> elements in the following tables have a closing tag.</p>
+
+<table>
+<caption>Followed by a comment
+<!-- a comment -->
+<tr><td>Random filler</td></tr>
+</table>
+<hr>
+
+<table>
+<caption>Followed by spaces     <tr><td>Random filler</td></tr>
+</table>
+<hr>
+
+<table>
+<caption>Followed by a newline
+<tr><td>Random filler</td></tr>
+</table>
+<hr>
+
+<table>
+<caption>Followed by another element's opening tag<tr><td>Random filler</td></tr>
+</table>
+
+</body>
+</html>
