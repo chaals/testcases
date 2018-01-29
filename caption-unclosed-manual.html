@@ -23,14 +23,29 @@
 <hr>
 
 <table>
+<caption>  The opening tag is followed by spaces<tr><td>Random filler</td></tr>
+</table>
+<hr>
+
+<table>
 <caption>Followed by a newline
 <tr><td>Random filler</td></tr>
 </table>
 <hr>
 
 <table>
-<caption>Followed by another element's opening tag<tr><td>Random filler</td></tr>
+<caption>Followed by another table element's opening tag<tr><td>Random filler</td></tr>
 </table>
+<hr>
+
+<table>
+<caption>Followed by an unclosed <code>p</code> tag<p>Is this a paragraph in the table?<tr><td>Random filler</td></tr>
+</table><hr>
+
+<table>
+<caption>Followed by a closed <code>p</code> tag<p>Is this a paragraph in the table?</p><tr><td>Random filler</td></tr>
+</table>
+
 
 </body>
 </html>
