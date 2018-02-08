@@ -25,10 +25,17 @@
  The content of that attribute should <em>not</em> be translated.</p>
 </section>
 
-<section aria-description="Test for the aria description attribute, which should behave the same as the aria-label attribute">
- <h2><code>aria-description</code></h2>
- <p>The <code>section</code> element has an <code>aria-description</code> attribute. The content of that attribute should be translated.</p>
-</section>
+<section>
+ <h2>SVG with <code>title</code>, <code>desc</code>, and aria</h2>
+ <p>
+  <svg aria-labeledby="themainlabel">
+    <title id="themainlabel">An SVG test<title>
+    <desc aria-label="A simple description">This is a basic test to see if SVG accessibility information text gets translated
+    by automatic translation systems</desc>
+    <text y=100>Hello World</text>
+  </svg>
+ </p>
+ </section>
 
 
 <section title="Test for some title attributes">
