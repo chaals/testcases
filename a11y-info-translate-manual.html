@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="utf-8">
+  <title>aria label translation test</title>
+ </head>
+ <body>
+ <h1>accessibility information translation test</h1>
+
+ <p>This tests whether automatic HTML translators pick up assorted accessibility information in attributes</p>
+
+<section aria-label="Test for the aria label attribute">
+ <h2><code>aria-label</code></h2>
+ <p>The <code>section</code> element has an <code>aria-label</code> attribute. The content of that attribute should be translated.</p>
+</section>
+
+<section>
+ <h2><code>alt</code></h2>
+ <p>This <code>img</code> element - <img src="bduck.jpg" alt="the picture of the black duck"> - has an <code>alt</code> attribute. The content of that attribute should be translated.</p>
+</section>
+
+<section aria-labeledby="alabel">
+ <h2><code>aria-label</code></h2>
+ <p id="alabel">The <code>section</code> element has an <code>aria-labeledby</code> attribute. 
+ The content of that attribute should <em>not</em> be translated.</p>
+</section>
+
+<section aria-description="Test for the aria description attribute, which should behave the same as the aria-label attribute">
+ <h2><code>aria-description</code></h2>
+ <p>The <code>section</code> element has an <code>aria-description</code> attribute. The content of that attribute should be translated.</p>
+</section>
+
+
+<section title="Test for some title attributes">
+ <h2 title="This is the section heading">Some <code title="this element identifies source code and the like">title</code> attributes</h2>
+ <p title="this paragraph has a title">Every element in this section has a <code title="this is code too">title</code> attribute.
+   The content of that attribute <em title="just to make the point">should</em> be translated.</p>
+</section>
+
+
+</body>
+</html>
