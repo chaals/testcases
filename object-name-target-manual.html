@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="utf-8">
+  <title>object name test</title>
+ </head>
+ <body>
+ <h1>test of <code>&lt;object name=</code></h1>
+
+ <p>This tests what happens when an <code>object</code> element has a name attribute and a link tries to target it.</p>
+
+<object name="jpgobject" type="image/jpg" data="aduck.jpg" width="300" height="300"></object>
+<object name="svgobject" data="title-first-child-manual.svg" width="300" height="300"></object>
+<object name="htmlobject" data="https://w3.org" width="300" height="300"></object>
+
+<p><a target="jpgobject" href="bduck.jpg">does this link change the first image?</a>
+<a target="jpgobject" href="https://s3-us-west-2.amazonaws.com/s.cdpn.io/91525/svg-ok.svg">does this link change the second image?</a>
+<a target="jpgobject" href="https://github.com">does this link change the first image?</a>
+</p>
+
+<p><a target="svgobject" href="bduck.jpg">does this link change the second image?</a>
+<a target="svgobject" href="https://s3-us-west-2.amazonaws.com/s.cdpn.io/91525/svg-ok.svg">does this link change the second image?</a>
+<a target="svgobject" href="https://github.com">does this link change the second image?</a></p>
+
+<p><a target="htmlobject" href="bduck.jpg">does this link change the third object?</a>
+<a target="htmlobject" href="https://s3-us-west-2.amazonaws.com/s.cdpn.io/91525/svg-ok.svg">does this link change the second image?</a>
+<a target="htmlobject" href="https://github.com">does this link change the third object?</a></p>
+</body>
+</html>
