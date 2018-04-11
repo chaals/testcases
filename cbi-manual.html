@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="utf-8">
+  <title>CBI test</title>
+  <script>
+  class PlasticButton extends HTMLButtonElement {
+  constructor() {
+    super();
+
+    this.addEventListener("click", () => {
+      document.getElementById("myButton").innerText = "done";
+    });
+  }
+}
+customElements.define("plastic-button", PlasticButton, { extends: "button" });
+</script>
+ </head>
+ <body>
+ <h1>@@test</h1>
+
+ <p>This tests…</p>
+<button is="plastic-button" id="myButton">Click Me!</button>
+<!-- a test goes here -->
+
+
+</body>
+</html>
