@@ -1,7 +1,8 @@
 <head>
 <style>.blue {background-color:blue}</style>
 </head>
-### heading
+
+### <span style="background-color:red">heading</span>
 
 <h2 class="blue">is this blue?</h2>
 
