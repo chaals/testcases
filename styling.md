@@ -1,6 +1,6 @@
 <head>
-<style>.blue {background-color:blue}</style>
-</head>
+<link rel="stylesheet" href="https://www.w3.org/StyleSheets/TR/2021/W3C-WD">
+  </head>
 
 ### <span style="background-color:red">heading</span>
 
