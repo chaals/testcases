@@ -7,5 +7,3 @@
 <h2 class="blue">is this blue?</h2>
 
 <h3 style="border: 1px red solid">does this have a border?</h3>
-
-doesn't seem helpful
