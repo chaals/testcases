@@ -8,4 +8,4 @@
 
 <h3 style="border: 1px red solid">does this have a border?</h3>
 
-Doesn't seem like markup styles automatically
+Doesn't seem like markdown reads styles automatically
